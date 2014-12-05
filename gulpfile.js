@@ -3,6 +3,8 @@ var gulp        = require('gulp'),
     minifyHTML  = require('gulp-minify-html'),
     concat      = require('gulp-concat'),
     uglify      = require('gulp-uglify'),
+    jshint      = require('gulp-jshint'),
+    stylish     = require('jshint-stylish'),
     browserSync = require('browser-sync'),
     del         = require('del');
 
@@ -60,6 +62,12 @@ gulp.task('browser-sync', function() {
       baseDir: "./dist/"
     }
   });
+});
+
+gulp.task('lint', function() {
+  gulp.src(['src/javascript/controllers/*.js', 'src/javascript/services/*.js', 'src/javascript/*.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish));
 });
 
 /**

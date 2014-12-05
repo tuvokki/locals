@@ -7,7 +7,7 @@ app.controller('MainController', function($scope){
   $scope.things = [];
   for (var i = 0; i < 100; i++) {
     $scope.things.push({code: i});
-  };
+  }
 
   $scope.toggleRightpanel = function(event){
     $scope.showInfo = !$scope.showInfo;
@@ -15,5 +15,5 @@ app.controller('MainController', function($scope){
       event.stopPropagation();
       event.preventDefault();
     }
-  }
+  };
 });
