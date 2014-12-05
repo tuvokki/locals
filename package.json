@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "A local thing",
   "main": "server.js",
+  "repository": "https://github.com/tuvokki/locals.git",
   "dependencies": {
     "finalhandler": "~0.1.0",
     "open": "~0.0.5",

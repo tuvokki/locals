@@ -13,5 +13,4 @@ var server = http.createServer(function(req, res){
 server.listen(8989);
 console.log("starting server on port 8989");
 var open = require('open');
-// open('http://localhost:8989/');
-open('http://whatever.dev/');
+open('http://localhost:8989/');
