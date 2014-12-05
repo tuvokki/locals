@@ -1,0 +1,99 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import 'includes/reset';
+@import 'includes/vars';
+
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+
+  background-color : $primary-color-five;
+  font-family: $main-font, $secundary-font;
+  font-size: $font-size;
+  -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;
+}
+$header_height: 4em;
+$footer_height: 2em;
+
+header {
+  height: $header_height;
+  background-color: $complement-color-two;
+  padding: 8px 2px;
+  color: rgba(255, 255, 255, 1);
+  position:relative;
+  z-index: 2;
+  h1 {
+    font-size: $font-size-h1;
+  }
+}
+.content {
+  height: 100%;
+  margin-top: -$header_height;
+  margin-right: 0;
+  margin-bottom: -$footer_height;
+  margin-left: 0;
+  color: rgba(0, 0, 0, 1);
+  overflow:auto;
+  padding-top: $header_height;
+  padding-bottom: $footer_height;
+  ul {
+    list-style-type: none;
+    .thing {
+      box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+      border-radius: 2px;
+      width: 140px;
+      margin: 2px 2px 0 10px;
+      padding: 2px;
+      p {
+        margin-left: auto;
+        margin-right: auto;
+        width: 6em
+}
+  }
+}
+}
+.rightpanel {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  margin-left: 99%;
+  padding-top: $header_height;
+  padding-left: 15px;
+  padding-bottom: $footer_height;
+  position: absolute;
+  top: 0;
+  transition: all 0.5s ease;
+  width: 25%;
+  z-index: 1;
+  .handle{
+    $handle-width: 12px;
+    background: $background-color;
+    border-radius: 2px 0 0 2px;
+    height: 15px;
+    left: -$handle-width;
+    opacity: .5;
+    position: absolute;
+    top: 4.2em;
+    width: $handle-width;
+  }
+  &.open {
+    margin-left: 75%;
+    padding-left: 0; /* remove border when open */
+  }
+  &:hover{
+    opacity: 1;
+  }
+}
+footer {
+  height: $footer_height;
+  background-color: $complement-color-two;
+  padding: 8px 2px;
+  color: rgba(255, 255, 255, 1);
+  position: relative;
+  z-index: 2;
+  a {
+    color: rgba(255, 255, 255, 1);
+    text-decoration: none;
+}
+}

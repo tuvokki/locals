@@ -1,0 +1,24 @@
+  <header>
+    <h1>{{whatsMyName}}</h1>
+  </header>
+<section class="content">
+      Stuff {{whosTheMan}}
+      <ul>
+    <li class="thing" ng-repeat="thing in things">
+      <article>
+        <a href="story{{thing.code}}.html">
+          <h3>Read article {{thing.code}}</h3>
+        </a>
+      </article>
+        </li>
+      </ul>
+    </section>
+<section class="rightpanel" ng-class="{open : showInfo}">
+  <div class="handle">
+    <a href="#" ng-click="toggleRightpanel($event)" class="close">x</a>
+  </div>
+  Happy
+</section>
+  <footer>
+    <h1><a href="#/fnurkels">Fnurkels</a></h1>
+  </footer>

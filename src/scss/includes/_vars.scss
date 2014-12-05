@@ -1,0 +1,90 @@
+$main-font: "Open Sans";
+$secundary-font: Arial, Helvetica, sans-serif;
+$font-size: 1em;
+$font-size-smaller: .8em;
+$font-size-h1: 1.2em;
+$font-size-h2: $font-size;
+$font-size-h3: .9em;
+$font-size-h4: $font-size-smaller;
+
+/**
+ * Scheme ID: http://colorschemedesigner.com/csd-3.5/#3-a2ruJ--NKEB
+ * Primary Color
+ */
+$primary-color-one: #3333FF;
+$primary-color-two: #666699;
+$primary-color-three: #000066;
+$primary-color-four: #6666FF;
+$primary-color-five: #9999FF;
+/**
+ * Complementary Color
+ */
+$complement-color-one: #FFCC00;
+$complement-color-two: #999933;
+$complement-color-three: #666600;
+$complement-color-four: #FFCC66;
+$complement-color-five: #FFFF99;
+
+$text-color: #666666;
+$text-color-light: #FFFFFF;
+$selected-color: #1464a1;
+$light-color: #D4D5D6;
+$border-color: $light-color;
+$input-border-color: #e5e5e5;
+$background-color: #f2f2f2;
+$background-color-light: #ffffff;
+$filter-color: #86bfdc;
+$grouping-color: #87A3C1;
+$background-btn-cancel: #C4C4C4;
+$background-btn-save: #1B659E;
+
+.clearfix {
+  &:after {
+      content: ".";
+	  display: block;
+	  clear: both;
+	  visibility: hidden;
+	  line-height: 0;
+	  height: 0;
+  }
+}
+
+/**
+ * Mixin for make text user selectable
+ *
+ * @param $value the value inherit, initial or none
+ */	
+@mixin user-select($value) {
+  -webkit-user-select: $value;  /* Chrome all / Safari all */
+  -moz-user-select: $value;     /* Firefox all */
+  -ms-user-select: $value;      /* IE 10+ */
+
+  /* No support for these yet, use at own risk */
+  -o-user-select: $value;
+  user-select: $value;
+}
+
+/**
+ * Mixin for selection highlighting
+ *
+ * @param $color the text color 
+ * @param $background the background color
+ */
+@mixin selection($color, $background){
+	::-moz-selection { 
+	    color: $color;
+	    background: $background;
+	}
+
+	::selection {
+	    color: $color; 
+	    background: $background;
+	}
+}
+
+@mixin background-cover(){
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
