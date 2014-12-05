@@ -1,10 +1,10 @@
 var gulp        = require('gulp'),
     sass        = require('gulp-sass'),
-    browserSync = require('browser-sync'),
     minifyHTML  = require('gulp-minify-html'),
     concat      = require('gulp-concat'),
-    clean       = require('gulp-clean'),
-    uglify      = require('gulp-uglify');
+    uglify      = require('gulp-uglify'),
+    browserSync = require('browser-sync'),
+    del         = require('del');
 
 gulp.task('sass', function () {
   gulp.src('src/scss/styles.scss')
@@ -65,10 +65,11 @@ gulp.task('browser-sync', function() {
 /**
  * Cleanup task. Removes the dist folder.
  */
-gulp.task('clean', function () {  
-  gulp.src('dist', {read: false})
-    .pipe(clean({force: true}))
-    .pipe(clean());
+gulp.task('clean', function () {
+  del([
+    // here we use a globbing pattern to match everything inside the dist folder
+    'dist/**'
+  ]);
 });
 
 gulp.task('default', ['vendor', 'scripts', 'minify-html', 'minify-partials', 'sass', 'browser-sync'], function () {
