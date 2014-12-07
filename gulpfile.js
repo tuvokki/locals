@@ -82,7 +82,7 @@ gulp.task('clean', function () {
 
 gulp.task('default', ['vendor', 'scripts', 'minify-html', 'minify-partials', 'sass', 'browser-sync'], function () {
   gulp.watch("src/scss/*.scss", ['sass']);
-  gulp.watch("src/javascript/**/*.js", ['scripts']);
+  gulp.watch("src/javascript/**/*.js", ['scripts', 'lint']);
   gulp.watch("src/index.html", ['minify-html']);
   gulp.watch("src/partials/*.html", ['minify-partials']);
 });

@@ -7,7 +7,7 @@ body {
    margin:0;
    padding:0;
    height:100%;
-
+   overflow-x: hidden;
   background-color : $primary-color-five;
   font-family: $main-font, $secundary-font;
   font-size: $font-size;
