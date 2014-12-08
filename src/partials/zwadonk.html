@@ -4,11 +4,12 @@
 <section class="content">
       Stuff {{whosTheMan}}
       <ul>
-    <li class="thing" ng-repeat="user in users">
+    <li class="thing" ng-repeat="repo in org_repos">
       <article>
-        <a href="{{user.html_url}}">
-          <h3>{{user.login}}</h3>
+        <a href="{{repo.html_url}}">
+          <h3>{{repo.name}}</h3>
         </a>
+        {{repo.description}}
       </article>
         </li>
       </ul>

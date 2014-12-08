@@ -51,8 +51,8 @@ gulp.task('vendor', function() {
 
 gulp.task('scripts', function() {
   gulp.src(['src/javascript/app.js', 'src/javascript/services/*.js', 'src/javascript/controllers/*.js'])
-    .pipe(concat('app.js'))
     // .pipe(uglify())
+    .pipe(concat('app.js'))
     .pipe(gulp.dest('dist/static/js'))
 });
 

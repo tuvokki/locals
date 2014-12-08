@@ -1,13 +1,13 @@
 /**
  * MainController. Responsible for the initial view.
  */
-app.controller('MainController', function($scope, GithubSvc){
+app.controller('MainController', ['$scope', 'GithubSvc', function($scope, GithubSvc){
   $scope.whatsMyName = 'Zwadonk';
   $scope.whosTheMan = chance.string();
   $scope.things = [];
-  GithubSvc.fetchStories().success(function (users) {
-    $scope.users = users;
-    console.log("users", users);
+  GithubSvc.fetchStories().success(function (org_repos) {
+    $scope.org_repos = org_repos;
+    console.log("org_repos", org_repos);
   });
 
   for (var i = 0; i < 100; i++) {
@@ -21,12 +21,12 @@ app.controller('MainController', function($scope, GithubSvc){
       event.preventDefault();
     }
   };
-});
+}]);
 
 app.factory('GithubSvc', function ($http) {
   return {
     fetchStories: function () {
-      return $http.get('https://api.github.com/users');
+      return $http.get('https://api.github.com/orgs/TuvokVersatileKolinahr/repos');
     }
   };
 });
