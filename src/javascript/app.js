@@ -1,7 +1,7 @@
 /**
  * This is the okkistan app
  */
-var app = angular.module('okkistan', ['ngRoute']);
+var app = angular.module('okkiStan', ['ngRoute', 'checklist-model']);
 
 app.config(function($routeProvider) {
     $routeProvider.
@@ -11,7 +11,7 @@ app.config(function($routeProvider) {
       }).
       when('/fnurkels', {
         templateUrl: 'partials/fnurkels.html',
-        controller: 'FnurkController'
+        controller: 'FnurkelsController'
       }).
       otherwise({
         redirectTo: '/zwadonk'

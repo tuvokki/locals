@@ -44,7 +44,7 @@ gulp.task('minify-partials', function() {
 });
 
 gulp.task('vendor', function() {
-  gulp.src(['src/javascript/vendor/angular.min.js', 'src/javascript/vendor/angular-route.min.js', 'src/javascript/vendor/chance.min.js'])
+  gulp.src(['src/javascript/vendor/angular.min.js', 'src/javascript/vendor/angular-route.min.js', 'src/javascript/vendor/checklist-model.js', 'src/javascript/vendor/chance.min.js'])
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('dist/static/js'))
 });

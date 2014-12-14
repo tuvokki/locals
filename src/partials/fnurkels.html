@@ -2,7 +2,18 @@
   <h1>{{whatsMyName}}</h1>
 </header>
 <section class="content">
-  {{whosTheMan}}
+  <form ng-submit="saveUrl()">
+  <button ng-click="checkAllTags()">Check all</button>
+  <button ng-click="uncheckAllTags()">Uncheck all</button><p>
+    <label ng-repeat="tag in tags">
+      <input type="checkbox" checklist-model="dump.tags" checklist-value="tag" id="id-{{tag}}" ng-change="saveUrl()">
+      <label for="id-{{tag}}">{{tag}}</label>
+    </label><p>
+
+    <!--label for="dumpground">Dump</label--><p>
+    <input type="url" id="dumpground" ng-model="dump.url" autofocus/><p>
+    <button>Save</button>
+  </form>
 </section>
 <footer>
   <h1><a href="#/zwadonk">Zwadonk</a></h1>

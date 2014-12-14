@@ -4,10 +4,10 @@
 
 html,
 body {
-   margin:0;
-   padding:0;
-   height:100%;
-   overflow-x: hidden;
+  margin:0;
+  padding:0;
+  height:100%;
+  overflow-x: hidden;
   background-color : $primary-color-five;
   font-family: $main-font, $secundary-font;
   font-size: $font-size;
@@ -49,10 +49,54 @@ header {
         margin-left: auto;
         margin-right: auto;
         width: 6em
-}
+      }
+    }
   }
-}
-}
+  form {
+    padding: 10px;
+    input {
+      border-radius: 5px;
+    }
+    input[type=checkbox] {
+        display:none;
+    }
+
+    input[type=checkbox] + label {
+      display:inline-block;
+      margin:-2px;
+      padding: 2px 12px;
+      margin-top: 10px;
+      margin-bottom: 0;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    input[type=checkbox]:checked + label {
+      background-image: none;
+      outline: 0;
+      background-color:#e0e0e0;
+    }
+
+    button {
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      border-radius: 0px;
+      -webkit-box-shadow: 0px 0px 0px #666666;
+      -moz-box-shadow: 0px 0px 0px #666666;
+      box-shadow: 0px 0px 0px #666666;
+      font-family: Arial;
+      color: #ffffff;
+      font-size: 14px;
+      background: #3498db;
+      padding: 8px 20px 8px 20px;
+      text-decoration: none;
+    }
+    button:hover {
+      background: #3cb0fd;
+      text-decoration: none;
+    }
+  }
+}//content
 .rightpanel {
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   background: rgba(0, 0, 0, 0.5);
@@ -84,7 +128,7 @@ header {
   &:hover{
     opacity: 1;
   }
-}
+}//rightpanel
 footer {
   height: $footer_height;
   background-color: $complement-color-two;
@@ -95,5 +139,5 @@ footer {
   a {
     color: rgba(255, 255, 255, 1);
     text-decoration: none;
-}
-}
+  }
+}//footer
