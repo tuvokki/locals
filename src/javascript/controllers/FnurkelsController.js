@@ -1,7 +1,10 @@
 /**
  * FnurkController. Responsible for the controlling the fnurk.
  */
-app.controller('FnurkelsController', function($scope){
+app.controller('FnurkelsController', function($scope, $route){
+
+  console.log("$route.current.params", $route.current.params);
+
   $scope.whatsMyName = 'Fnurkels';
 
   $scope.theUrl = '';
@@ -15,7 +18,7 @@ app.controller('FnurkelsController', function($scope){
 
   $scope.dump = {
     tags: ['testing'],
-    url: 'http://www.tuvok.nl/'
+    url: $route.current.params.urlletje
   };
 
   function _saveUrl() {
