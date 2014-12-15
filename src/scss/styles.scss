@@ -55,7 +55,23 @@ header {
   form {
     padding: 10px;
     input {
-      border-radius: 5px;
+      margin: 10px 6px 10px 6px;
+      background-color: $primary-color-five;
+      border: 1px solid $complement-color-two;
+      padding: 4px 4px 4px 4px; 
+      box-shadow: 0px 0px 8px $complement-color-two;
+      font-size: $font-size;
+    }
+    input:focus {
+      outline: none; 
+      border: 1px solid $complement-color-one; 
+      box-shadow: 0px 0px 8px $complement-color-one; 
+    }
+    input.smallfield {
+      width: 100px;
+    }
+    input.bigfield {
+      width: 500px;
     }
     input[type=checkbox] {
         display:none;
@@ -67,32 +83,32 @@ header {
       padding: 2px 12px;
       margin-top: 10px;
       margin-bottom: 0;
-      font-size: 14px;
       line-height: 20px;
     }
 
     input[type=checkbox]:checked + label {
       background-image: none;
       outline: 0;
-      background-color:#e0e0e0;
+      color: $complement-color-one;
+      background-color:$complement-color-two;
+      box-shadow: 0px 0px 8px $complement-color-two;
     }
 
     button {
-      -webkit-border-radius: 0;
-      -moz-border-radius: 0;
-      border-radius: 0px;
-      -webkit-box-shadow: 0px 0px 0px #666666;
-      -moz-box-shadow: 0px 0px 0px #666666;
-      box-shadow: 0px 0px 0px #666666;
-      font-family: Arial;
       color: #ffffff;
-      font-size: 14px;
-      background: #3498db;
-      padding: 8px 20px 8px 20px;
+      font-size: $font-size;
       text-decoration: none;
+      box-shadow:inset 0px 1px 0px 0px $complement-color-two;
+      background:linear-gradient(to bottom, $complement-color-two 5%, $complement-color-two 100%);
+
+      background-color:#74ad5a;
+      border:1px solid #3b6e22;
+      display:inline-block;
+      cursor:pointer;
     }
     button:hover {
-      background: #3cb0fd;
+      background: $complement-color-two;
+      color: $complement-color-one;
       text-decoration: none;
     }
   }

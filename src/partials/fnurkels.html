@@ -3,15 +3,18 @@
 </header>
 <section class="content">
   <form ng-submit="saveUrl()">
-  <button ng-click="checkAllTags()">Check all</button>
-  <button ng-click="uncheckAllTags()">Uncheck all</button><p>
     <label ng-repeat="tag in tags">
       <input type="checkbox" checklist-model="dump.tags" checklist-value="tag" id="id-{{tag}}" ng-change="saveUrl()">
       <label for="id-{{tag}}">{{tag}}</label>
-    </label><p>
+    </label>
+    <input type="text" ng-model="newTag" placeholder="new tag" class="smallfield" ng-click="addNewTag($event)" />
+    <button ng-click="addNewTag($event)">Add</button>
+    <p>
 
+  <button ng-click="checkAllTags()" type="button">Check all</button>
+  <button ng-click="uncheckAllTags()" type="button">Uncheck all</button><p>
     <!--label for="dumpground">Dump</label--><p>
-    <input type="url" id="dumpground" ng-model="dump.url" autofocus/><p>
+    <input type="url" id="dumpground" ng-model="dump.url" class="bigfield" autofocus /><p>
     <button>Save</button>
   </form>
 </section>

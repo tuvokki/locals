@@ -6,10 +6,12 @@ var gulp        = require('gulp'),
     jshint      = require('gulp-jshint'),
     stylish     = require('jshint-stylish'),
     browserSync = require('browser-sync'),
-    del         = require('del');
+    del         = require('del'),
+    plumber     = require('gulp-plumber');
 
 gulp.task('sass', function () {
   gulp.src('src/scss/styles.scss')
+    .pipe(plumber())
     .pipe(sass({includePaths: ['scss']}))
     .pipe(gulp.dest('dist/static/css'));
 });
@@ -31,6 +33,7 @@ gulp.task('minify-html', function() {
   var opts = {empty:true,spare:true};
 
   gulp.src('src/*.html')
+    .pipe(plumber())
     .pipe(minifyHTML(opts))
     .pipe(gulp.dest('dist'))
 });
@@ -39,18 +42,21 @@ gulp.task('minify-partials', function() {
   var opts = {empty:true,spare:true};
 
   gulp.src('src/partials/*.html')
+    .pipe(plumber())
     .pipe(minifyHTML(opts))
     .pipe(gulp.dest('dist/partials'))
 });
 
 gulp.task('vendor', function() {
   gulp.src(['src/javascript/vendor/angular.min.js', 'src/javascript/vendor/angular-route.min.js', 'src/javascript/vendor/checklist-model.js', 'src/javascript/vendor/chance.min.js'])
+    .pipe(plumber())
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('dist/static/js'))
 });
 
 gulp.task('scripts', function() {
   gulp.src(['src/javascript/app.js', 'src/javascript/services/*.js', 'src/javascript/controllers/*.js'])
+    .pipe(plumber())
     // .pipe(uglify())
     .pipe(concat('app.js'))
     .pipe(gulp.dest('dist/static/js'))
@@ -66,6 +72,7 @@ gulp.task('browser-sync', function() {
 
 gulp.task('lint', function() {
   gulp.src(['src/javascript/controllers/*.js', 'src/javascript/services/*.js', 'src/javascript/*.js'])
+    .pipe(plumber())
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
 });

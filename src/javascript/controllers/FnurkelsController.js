@@ -18,8 +18,25 @@ app.controller('FnurkelsController', function($scope){
     url: 'http://www.tuvok.nl/'
   };
 
+  function _saveUrl() {
+    console.log("in _saveUrl method", $scope.dump);
+  }
+
   $scope.saveUrl = function() {
-    console.log("$scope.dump", $scope.dump);
+    _saveUrl();
+  };
+
+  $scope.addNewTag = function(event) {
+    if (!angular.isUndefined($scope.newTag) && $scope.tags.indexOf($scope.newTag) === -1 && $scope.newTag !== '') {
+      $scope.tags.push($scope.newTag);
+      $scope.dump.tags.push($scope.newTag);
+      $scope.newTag = '';
+    }
+    _saveUrl();
+    if(event){
+      event.stopPropagation();
+      event.preventDefault();
+    }
   }
 
   $scope.checkAllTags = function() {
