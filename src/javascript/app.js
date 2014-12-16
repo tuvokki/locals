@@ -1,7 +1,7 @@
 /**
  * This is the okkistan app
  */
-var app = angular.module('okkiStan', ['ngRoute', 'checklist-model']);
+var app = angular.module('okkiStan', ['ngRoute', 'ngResource', 'checklist-model']);
 
 app.config(function($routeProvider) {
     $routeProvider.

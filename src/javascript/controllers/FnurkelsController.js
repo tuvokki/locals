@@ -3,7 +3,7 @@
  */
 app.controller('FnurkelsController', function($scope, $route, LinkBagData){
 
-  console.log("LinkBagData.getLinks()", LinkBagData.getLinks());
+  $scope.linkbaglist = LinkBagData.query();
 
   $scope.whatsMyName = 'Fnurkels';
 
@@ -18,11 +18,18 @@ app.controller('FnurkelsController', function($scope, $route, LinkBagData){
 
   $scope.dump = {
     tags: ['testing'],
-    url: $route.current.params.urlletje
+    urlletje: $route.current.params.urlletje
   };
 
   function _saveUrl() {
     console.log("in _saveUrl method", $scope.dump);
+    // we can create an instance as well
+    var newLink = new LinkBagData($scope.dump);
+    newLink.$save(function(item, putResponseHeaders) {
+      //item => saved user object
+      $scope.linkbaglist.push(item);
+      //putResponseHeaders => $http header getter
+    });
   }
 
   $scope.saveUrl = function() {
@@ -35,7 +42,7 @@ app.controller('FnurkelsController', function($scope, $route, LinkBagData){
       $scope.dump.tags.push($scope.newTag);
       $scope.newTag = '';
     }
-    _saveUrl();
+    // _saveUrl();
     if(event){
       event.stopPropagation();
       event.preventDefault();
