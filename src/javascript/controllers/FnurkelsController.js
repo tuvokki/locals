@@ -1,9 +1,9 @@
 /**
  * FnurkController. Responsible for the controlling the fnurk.
  */
-app.controller('FnurkelsController', function($scope, $route){
+app.controller('FnurkelsController', function($scope, $route, LinkBagData){
 
-  console.log("$route.current.params", $route.current.params);
+  console.log("LinkBagData.getLinks()", LinkBagData.getLinks());
 
   $scope.whatsMyName = 'Fnurkels';
 

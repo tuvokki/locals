@@ -32,3 +32,6 @@ dist
 
 # tmp files
 tmp
+
+# the bower client files
+client
