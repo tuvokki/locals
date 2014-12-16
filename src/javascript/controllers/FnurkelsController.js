@@ -3,26 +3,37 @@
  */
 app.controller('FnurkelsController', function($scope, $route, LinkBagData){
 
-  $scope.linkbaglist = LinkBagData.query();
-
   $scope.whatsMyName = 'Fnurkels';
 
   $scope.theUrl = '';
 
   $scope.tags = [
-    'javascript', 
-    'tuts', 
-    'testing', 
-    'admin'
   ];
 
+  $scope.linkbaglist = LinkBagData.query({}, function() {
+    angular.forEach($scope.linkbaglist, function(linkbag) {
+      // combine the tags using Array#reduce
+      // See: http://davidwalsh.name/combining-js-arrays
+      $scope.tags = linkbag.tags.reduce( function(coll,item){
+          coll.push( item );
+          return coll;
+      }, $scope.tags );
+    });
+
+    // Remove the duplicates
+    // Although concise, this algorithm is not particularly efficient for large arrays (quadratic time).
+    // See: http://stackoverflow.com/a/9229821/2245236
+    $scope.tags = $scope.tags.filter(function(item, pos, self) {
+      return self.indexOf(item) == pos;
+    });
+  });
+
   $scope.dump = {
-    tags: ['testing'],
+    tags: [],
     urlletje: $route.current.params.urlletje
   };
 
   function _saveUrl() {
-    console.log("in _saveUrl method", $scope.dump);
     // we can create an instance as well
     var newLink = new LinkBagData($scope.dump);
     newLink.$save(function(item, putResponseHeaders) {
