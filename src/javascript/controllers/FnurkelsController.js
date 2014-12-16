@@ -40,7 +40,7 @@ app.controller('FnurkelsController', function($scope, $route){
       event.stopPropagation();
       event.preventDefault();
     }
-  }
+  };
 
   $scope.checkAllTags = function() {
     $scope.dump.tags = angular.copy($scope.tags);
