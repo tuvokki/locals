@@ -1,7 +1,7 @@
 /**
  * FnurkController. Responsible for the controlling the fnurk.
  */
-app.controller('FnurkelsController', function($scope, $route, LinkBagData){
+app.controller('FnurkelsController', function($scope, $route, $location, LinkBagData){
 
   $scope.whatsMyName = 'Fnurkels';
 
@@ -9,6 +9,8 @@ app.controller('FnurkelsController', function($scope, $route, LinkBagData){
 
   $scope.tags = [
   ];
+
+  $scope.blet = "javascript:(function(){window.location='" + $location.absUrl() + "?urlletje='+encodeURIComponent(window.location.href);})()";
 
   $scope.linkbaglist = LinkBagData.query({}, function() {
     angular.forEach($scope.linkbaglist, function(linkbag) {

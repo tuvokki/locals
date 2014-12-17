@@ -17,9 +17,14 @@
     <input type="url" id="dumpground" ng-model="dump.urlletje" class="bigfield" autofocus /><p>
     <button>Save</button>
   </form>
-  <ul ng-repeat="linkbaglink in linkbaglist">
+
+  <ul ng-repeat="linkbaglink in linkbaglist" class="linkbaglist">
     <li>{{ linkbaglink.urlletje }} {{ linkbaglink.tags }}</li>    
   </ul>
+  <hr>
+  <div class="bookmarklet">Your bookmarklet: <br>
+    <span><a href="{{ blet }}">Fnurkels</a></span><br>
+    Copy and paste this into an existing bookmark's location and navigate away from this page. Then click the bookmarklet and watch the magic happen ....</div>
 </section>
 <footer>
   <h1><a href="#/zwadonk">Zwadonk</a></h1>
