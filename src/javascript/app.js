@@ -12,7 +12,7 @@ app.config([
   }])
   .config([
   '$routeProvider',
-  function($locationProvider, $routeProvider) {
+  function($routeProvider) {
     $routeProvider.
       when('/zwadonk', {
         templateUrl: 'partials/zwadonk.html',

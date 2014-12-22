@@ -13,25 +13,14 @@ app.controller('MessagesController', ['$scope', '$firebase', '$location', functi
   // place the list into $scope for use in the DOM
   $scope.messages = messagesArray;
 
-  var uname = window.location.href.replace(window.location.hash, '').split('?')[1].split("&")[2].split('=')[1];
-  // console.log('Username: [%s]', uname);
+  function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+  }
+  $scope.uname = getURLParameter('uname');
 
-  // // add a new record to the list
-  // messagesArray.$add({ user: "physicsmarie", text: "Hello world" });
-  // // remove an item from the list
-  // messagesArray.$remove(aRecordKey);
-  // // change a message and save it
-  // var item = messagesArray.$getRecord(aRecordKey);
-  // item.user = "alanisawesome";
-  // messagesArray.$save(item).then(function() {
-  //   // data has been saved to Firebase
-  // });
-  
-
-  $scope.addMessage = function (newMessageText) {
-    console.log('newMessageText', newMessageText);
-
-    messagesArray.$add({ user: uname, text: newMessageText });
+  $scope.addMessage = function () {
+    messagesArray.$add({ user: $scope.uname, text: $scope.messageText });
+    $scope.messageText = '';
   };
 
 

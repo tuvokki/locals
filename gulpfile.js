@@ -56,13 +56,21 @@ gulp.task('vendor', function() {
 
   // assume that all bower deps have to be included in the order they are listed in bower.json
   underscore.each(bowerFile.dependencies, function(version, name){
-    var file = bowerDir + '/' + name + '/' + name;
-    if (fs.existsSync(file + '.min.js')) {
+    var dir = bowerDir + '/' + name + '/';
+    var bowerDepFile = require(dir + 'bower.json');
+    var file = dir + bowerDepFile.main;
+    var minfile = file.substring(0, file.length - 3) + '.min.js';
+    console.log("file", file);
+    console.log("minfile", minfile);
+
+    if (fs.existsSync(minfile)) {
       // use min version
-      bowerPackages.push(file + '.min.js');
+      console.log("use min");
+      bowerPackages.push(minfile);
     } else {
       // unminified
-      bowerPackages.push(file + '.js');
+      console.log("use file");
+      bowerPackages.push(file);
     }
   });
 

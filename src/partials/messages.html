@@ -11,8 +11,9 @@
       </li>
     </ul>
     <!-- push a new message into the array -->
-    <form ng-submit="addMessage(newMessageText)">
-      <input ng-model="newMessageText" />
+    <form ng-submit="addMessage()">
+      <input ng-model="uname" placeholder="You!" /> saiz 
+      <input ng-model="messageText" placeholder="message text" />
       <button type="submit">add message</button>
     </form>
 </section>
