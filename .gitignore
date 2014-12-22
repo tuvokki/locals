@@ -36,3 +36,4 @@ tmp
 
 # the bower client files
 client
+bower_components
