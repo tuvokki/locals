@@ -3,10 +3,7 @@
 </header>
 <section class="content">
   <form ng-submit="saveUrl()">
-    <label ng-repeat="tag in tags">
-      <input type="checkbox" checklist-model="dump.tags" checklist-value="tag" id="id-{{tag}}">
-      <label for="id-{{tag}}">{{tag}}</label>
-    </label>
+    <div shared-taglist></div>
     <input type="text" ng-model="newTag" placeholder="new tag" class="smallfield" ng-click="addNewTag($event)" />
     <button ng-click="addNewTag($event)">Add</button>
     <p>
@@ -18,8 +15,13 @@
     <button>Save</button>
   </form>
 
-  <ul ng-repeat="linkbaglink in linkbaglist" class="linkbaglist">
-    <li>{{ linkbaglink.urlletje }} {{ linkbaglink.tags }}</li>    
+  <ul class="linkbaglist">
+    <li ng-repeat="linkbaglink in linkbaglist" class="link">
+      <a href="{{ linkbaglink.urlletje }}">{{ linkbaglink.urlletje }}</a>
+      <ul ng-repeat="datag in linkbaglink.tags" class="tags">
+         <li class="tag">{{ datag }}</li> 
+      </ul>
+    </li>    
   </ul>
   <hr>
   <div class="bookmarklet">Your bookmarklet: <br>

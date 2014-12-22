@@ -10,6 +10,8 @@ app.controller('FnurkelsController', function($scope, $route, $location, LinkBag
   $scope.tags = [
   ];
 
+  // set the "scripturl" option to supress the JSLint 'Script URL' warning 
+  /*jshint scripturl:true*/
   $scope.blet = "javascript:(function(){window.location='" + $location.absUrl() + "?urlletje='+encodeURIComponent(window.location.href);})()";
 
   $scope.linkbaglist = LinkBagData.query({}, function() {
@@ -35,6 +37,14 @@ app.controller('FnurkelsController', function($scope, $route, $location, LinkBag
     urlletje: $route.current.params.urlletje
   };
 
+  /**
+   * different implementation of trim in Javascript in terms of performance
+   * See: http://blog.stevenlevithan.com/archives/faster-trim-javascript
+   */
+  function _fasttrim (str) {
+      return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+  }
+
   function _saveUrl() {
     // we can create an instance as well
     var newLink = new LinkBagData($scope.dump);
@@ -51,8 +61,10 @@ app.controller('FnurkelsController', function($scope, $route, $location, LinkBag
 
   $scope.addNewTag = function(event) {
     if (!angular.isUndefined($scope.newTag) && $scope.tags.indexOf($scope.newTag) === -1 && $scope.newTag !== '') {
-      $scope.tags.push($scope.newTag);
-      $scope.dump.tags.push($scope.newTag);
+      // var myNewTag = _fasttrim($scope.newTag).toLowerCase();
+      var myNewTag = $scope.newTag.replace(/\s+/g, '').toLowerCase();
+      $scope.tags.push(myNewTag);
+      $scope.dump.tags.push(myNewTag);
       $scope.newTag = '';
     }
     // _saveUrl();

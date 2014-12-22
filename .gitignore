@@ -24,8 +24,9 @@ build/Release
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
 node_modules
 
-# Users Environment Variables
+# Users Environment Variables / Sublime files
 .lock-wscript
+.sublime-gulp.cache
 
 # compiled and runnable sources
 dist

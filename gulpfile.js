@@ -1,4 +1,6 @@
-var gulp        = require('gulp'),
+var underscore  = require('underscore'),
+    fs          = require('fs'),
+    gulp        = require('gulp'),
     sass        = require('gulp-sass'),
     minifyHTML  = require('gulp-minify-html'),
     concat      = require('gulp-concat'),
@@ -48,18 +50,30 @@ gulp.task('minify-partials', function() {
 });
 
 gulp.task('vendor', function() {
-  gulp.src(['client/lib/angular/angular.min.js',
-            'client/lib/angular-route/angular-route.min.js',
-            'client/lib/angular-resource/angular-resource.min.js',
-            'client/lib/checklist-model/checklist-model.js',
-            'client/lib/chance/chance.js'])
+  var bowerFile = require('./bower.json');
+  var bowerDir = './client/lib';
+  var bowerPackages = [];
+
+  // assume that all bower deps have to be included in the order they are listed in bower.json
+  underscore.each(bowerFile.dependencies, function(version, name){
+    var file = bowerDir + '/' + name + '/' + name;
+    if (fs.existsSync(file + '.min.js')) {
+      // use min version
+      bowerPackages.push(file + '.min.js');
+    } else {
+      // unminified
+      bowerPackages.push(file + '.js');
+    }
+  });
+
+  gulp.src(bowerPackages)
     .pipe(plumber())
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('dist/static/js'))
 });
 
 gulp.task('scripts', function() {
-  gulp.src(['src/javascript/app.js', 'src/javascript/services/*.js', 'src/javascript/controllers/*.js'])
+  gulp.src(['src/javascript/app.js', 'src/javascript/directives/*.js', 'src/javascript/services/*.js', 'src/javascript/controllers/*.js'])
     .pipe(plumber())
     // .pipe(uglify())
     .pipe(concat('app.js'))

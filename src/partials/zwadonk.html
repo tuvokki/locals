@@ -1,25 +1,27 @@
   <header>
     <h1>{{whatsMyName}}</h1>
   </header>
-<section class="content">
-      Stuff {{whosTheMan}}
-      <ul>
-    <li class="thing" ng-repeat="repo in org_repos">
-      <article>
-        <a href="{{repo.html_url}}">
-          <h3>{{repo.name}}</h3>
-        </a>
-        {{repo.description}}
-      </article>
-        </li>
-      </ul>
-    </section>
-<section class="rightpanel" ng-class="{open : showInfo}">
-  <div class="handle">
-    <a href="#" ng-click="toggleRightpanel($event)" class="close">x</a>
-  </div>
-  Happy
-</section>
+  <section class="content">
+    {{whosTheMan}}
+    <form>
+      <div shared-taglist></div>
+    </form>
+    <ul class="linkbaglist">
+      <li ng-repeat="linkbaglink in linkbaglist" class="link">
+        <a href="{{ linkbaglink.urlletje }}">{{ linkbaglink.urlletje }}</a>
+        <ul ng-repeat="datag in linkbaglink.tags" class="tags">
+           <li class="tag">{{ datag }}</li> 
+        </ul>
+      </li>    
+    </ul>
+    <div my-dom-directive>Click Me!</div>
+  </section>
+  <section class="rightpanel" ng-class="{open : showInfo}">
+    <div class="handle">
+      <a href="#" ng-click="toggleRightpanel($event)" class="close">x</a>
+    </div>
+    Happy
+  </section>
   <footer>
     <h1><a href="#/fnurkels">Fnurkels</a></h1>
   </footer>

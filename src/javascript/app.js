@@ -3,7 +3,15 @@
  */
 var app = angular.module('okkiStan', ['ngRoute', 'ngResource', 'checklist-model']);
 
-app.config(
+app.config([
+  '$compileProvider',
+  function( $compileProvider )
+  {   
+    // explicitly add URL protocols to Angular's whitelist
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|javascript):/);
+  }])
+  .config([
+  '$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/zwadonk', {
@@ -17,13 +25,6 @@ app.config(
       otherwise({
         redirectTo: '/zwadonk'
       });
-  })
-  .config([
-    '$compileProvider',
-    function( $compileProvider )
-    {   
-      // explicitly add URL protocols to Angular's whitelist
-      $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|javascript):/);
     }
-]
+  ]
 );

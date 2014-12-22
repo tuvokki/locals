@@ -99,17 +99,53 @@ header {
       font-size: $font-size;
       text-decoration: none;
       box-shadow:inset 0px 1px 0px 0px $complement-color-two;
-      background:linear-gradient(to bottom, $complement-color-two 5%, $complement-color-two 100%);
+      background: $complement-color-two;
 
-      background-color:#74ad5a;
-      border:1px solid #3b6e22;
-      display:inline-block;
-      cursor:pointer;
+      border: 1px solid $complement-color-two;
+      display: inline-block;
     }
     button:hover {
-      background: $complement-color-two;
-      color: $complement-color-one;
+      background: $complement-color-three;
+      box-shadow:inset 0px 1px 0px 0px $complement-color-three;
+      border: 1px solid $complement-color-three;
+      color: $complement-color-four;
       text-decoration: none;
+      display: inline-block;
+    }
+  }
+  ul.linkbaglist {
+    margin: 4px 0 0 10px;
+    li.link {
+      opacity: .9;
+      width: 400px;
+      height: 3.3em;
+      margin: 2px;
+      padding: 2px;
+      background: $primary-color-four;
+      border: 1px solid $primary-color-three;
+      display: inline-block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow:hidden; 
+      a {
+        display: block;
+        padding-bottom: 2em;
+      }
+    }
+    ul.tags {
+      padding-top: 4px;
+      position: relative;
+      top: -2em;
+      display: inline-block;
+      li.tag {
+        padding: 4px;
+        float: left;
+        background: $primary-color-one;
+        border: 2px solid $primary-color-four;
+      }
+    }
+    li.link:hover {
+      opacity: 1;
     }
   }
 }//content
