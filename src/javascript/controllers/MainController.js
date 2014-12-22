@@ -2,6 +2,7 @@
  * MainController. Responsible for the initial view.
  */
 app.controller('MainController', function($scope, LinkBagData, LinkBagUtils){
+
   $scope.whatsMyName = 'Zwadonk';
   $scope.whosTheMan = chance.string();
 

@@ -1,7 +1,7 @@
 /**
  * This is the okkistan app
  */
-var app = angular.module('okkiStan', ['ngRoute', 'ngResource', 'checklist-model']);
+var app = angular.module('okkiStan', ['ngRoute', 'ngResource', 'checklist-model', 'firebase']);
 
 app.config([
   '$compileProvider',
@@ -12,7 +12,7 @@ app.config([
   }])
   .config([
   '$routeProvider',
-  function($routeProvider) {
+  function($locationProvider, $routeProvider) {
     $routeProvider.
       when('/zwadonk', {
         templateUrl: 'partials/zwadonk.html',
@@ -22,8 +22,12 @@ app.config([
         templateUrl: 'partials/fnurkels.html',
         controller: 'FnurkelsController'
       }).
+      when('/messages', {
+        templateUrl: 'partials/messages.html',
+        controller: 'MessagesController'
+      }).
       otherwise({
-        redirectTo: '/zwadonk'
+        redirectTo: '/messages'
       });
     }
   ]

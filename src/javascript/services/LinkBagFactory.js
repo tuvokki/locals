@@ -1,5 +1,6 @@
 app.factory('LinkBagData', function($resource) {
-  return $resource('http://localhost:3019/linkbag/:id');
+//   return $resource('http://localhost:3019/linkbag/:id');
+  return $resource('http://whatever.tuvok.nl/linkback/:id');
 });
 app.factory('LinkBagUtils', function() {
   var tags = [];
