@@ -10,6 +10,7 @@ app.controller('FnurkelsController', function($scope, $route, $location, LinkBag
   $scope.tags = [
   ];
 
+  /*jshint scripturl:true*/
   $scope.blet = "javascript:(function(){window.location='" + $location.absUrl() + "?urlletje='+encodeURIComponent(window.location.href);})()";
 
   $scope.linkbaglist = LinkBagData.query({}, function() {

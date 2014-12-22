@@ -48,11 +48,13 @@ gulp.task('minify-partials', function() {
 });
 
 gulp.task('vendor', function() {
-  gulp.src(['client/lib/angular/angular.min.js',
-            'client/lib/angular-route/angular-route.min.js',
-            'client/lib/angular-resource/angular-resource.min.js',
-            'client/lib/checklist-model/checklist-model.js',
-            'client/lib/chance/chance.js'])
+  gulp.src(['bower_components/angular/angular.min.js',
+            'bower_components/angular-route/angular-route.min.js',
+            'bower_components/angular-resource/angular-resource.min.js',
+            'bower_components/firebase/firebase.js',
+            'bower_components/angularfire/dist/angularfire.min.js',
+            'bower_components/checklist-model/checklist-model.js',
+            'bower_components/chance/chance.js'])
     .pipe(plumber())
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('dist/static/js'))

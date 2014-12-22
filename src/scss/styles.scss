@@ -1,6 +1,8 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600);
 @import 'includes/reset';
 @import 'includes/vars';
+
+$font-size-pss: 12px;
 
 html,
 body {
@@ -9,22 +11,36 @@ body {
   height:100%;
   overflow-x: hidden;
   background-color : $primary-color-five;
-  font-family: $main-font, $secundary-font;
-  font-size: $font-size;
+  color: $text-color;
+  font-family: $secundary-font;
+  font-size: $font-size-pss;
   -webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;
 }
-$header_height: 4em;
+$header_height: 40px;
 $footer_height: 2em;
 
 header {
   height: $header_height;
-  background-color: $complement-color-two;
+  background-image: url(http://pc06698/wicket/resource/nl.planon.pss.wicket.PssBasePage/styling/img/PSSicon.png);
+  background-position-x: 15px;
+  background-position-y: 50%;
+  background-repeat: no-repeat;
+  background-color: rgb(255, 255, 255);
   padding: 8px 2px;
   color: rgba(255, 255, 255, 1);
   position:relative;
   z-index: 2;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.3);
   h1 {
-    font-size: $font-size-h1;
+    color: #3F4751;
+    font-family: 'Open Sans';
+    font-weight: 600; 
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 0 0 53px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 .content {
@@ -35,14 +51,15 @@ header {
   margin-left: 0;
   color: rgba(0, 0, 0, 1);
   overflow:auto;
-  padding-top: $header_height;
+  padding-top: $header_height+10;
+  padding-left: 8px;
   padding-bottom: $footer_height;
   ul {
     list-style-type: none;
     .thing {
-      box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+      // box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
       border-radius: 2px;
-      width: 440px;
+      width: 420px;
       margin: 2px 2px 0 10px;
       padding: 2px;
       p {
@@ -152,8 +169,17 @@ footer {
   color: rgba(255, 255, 255, 1);
   position: relative;
   z-index: 2;
+  background-color: rgb(255, 255, 255);
   a {
-    color: rgba(255, 255, 255, 1);
+    color: #3F4751;
+    font-family: 'Open Sans';
+    font-weight: 600; 
+    font-size: 16px;
+    height: $footer_height;
+    margin: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     text-decoration: none;
   }
 }//footer

@@ -1,7 +1,7 @@
 /**
  * MainController. Responsible for the initial view.
  */
-app.controller('MainController', ['$scope', 'GithubSvc', function($scope, GithubSvc){
+app.controller('MainController', ['$scope', 'GithubSvc', '$firebase', function($scope, GithubSvc, $firebase){
   $scope.whatsMyName = 'Zwadonk';
   $scope.whosTheMan = chance.string();
   $scope.things = [];
@@ -9,6 +9,12 @@ app.controller('MainController', ['$scope', 'GithubSvc', function($scope, Github
     $scope.org_repos = org_repos;
     console.log("org_repos", org_repos);
   });
+
+  var ref = new Firebase("https://amber-fire-3343.firebaseio.com/");
+  // create an AngularFire reference to the data
+  var sync = $firebase(ref);
+  // download the data into a local object
+  $scope.data = sync.$asObject();
 
   for (var i = 0; i < 100; i++) {
     $scope.things.push({code: i});
