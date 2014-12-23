@@ -14,7 +14,7 @@ app.controller('MessagesController', ['$scope', '$firebase', '$location', functi
   $scope.messages = messagesArray;
 
   function getURLParameter(name) {
-    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
   }
   $scope.uname = getURLParameter('uname');
 
