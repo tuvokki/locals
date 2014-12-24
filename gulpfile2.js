@@ -1,8 +1,3 @@
-/**
- * Some nice examples:
- * http://thewebistheplatform.com/magic-gulpfiles-part-1/
- */
-
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
@@ -25,8 +20,9 @@ var gulp = require('gulp'),
     gulpif = require('gulp-if'),
     todo = require('gulp-todo'),
     jsdoc = require("gulp-jsdoc"),
-    ngannotate = require('gulp-ng-annotate');
-
+    plumber = require('gulp-plumber'),
+    ngannotate = require('gulp-ng-annotate'),
+    replace = require('gulp-replace');
 
 /**
  * browser-sync task for starting a server. This will open a browser for you. Point multiple browsers / devices to the same url and watch the magic happen.
@@ -77,14 +73,22 @@ gulp.task('clean', function(cb) {
  * Copies all to dist/
  */
 gulp.task('copy', function() {
-    gulp.src( 'src/fonts/**')
-      .pipe(gulp.dest('dist/assets/fonts'));
 
-    gulp.src( 'src/js/app/**/*.html')
-      .pipe(gulp.dest('dist/assets/js/app'));
+  // copy all jpg's as they are not handled by the images task
+  gulp.src( 'src/img/**/*.jpg')
+    .pipe(gulp.dest('dist/assets/img'));
 
-    return gulp.src('src/index.html')
-        .pipe(gulp.dest('dist/'));
+  // copy all fonts
+  gulp.src( 'src/fonts/**')
+    .pipe(gulp.dest('dist/assets/fonts'));
+
+  // copy all html && json
+  gulp.src( ['src/js/app/**/*.html', 'src/js/app/**/*.json'])
+    .pipe(gulp.dest('dist/assets/js/app'));
+
+  // copy the index.html
+  return gulp.src('src/index.html')
+    .pipe(gulp.dest('dist/'));
 });
 
 
@@ -126,6 +130,7 @@ gulp.task('express-lr', ['express', 'live-reload'], function(){});
  */
 gulp.task('images', function() {
   return gulp.src('src/img/**/*')
+    .pipe(plumber())
     .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
     .pipe(gulp.dest('dist/assets/img'))
     .pipe(notify({ message: 'Images task complete' }));
@@ -133,19 +138,24 @@ gulp.task('images', function() {
 
 
 /**
- * Start the live reload server. Live reload will be triggered when a file in the `dist` folder or the index.html changes.
+ * Start the live reload server. Live reload will be triggered when a file in the `dist` folder or the index.html changes. This will add a live-reload script to the page, which makes it all happen.
  * Depends on: watch
  */
 gulp.task('live-reload', ['watch'], function() {
 
+  // first, delete the index.html from the dist folder as we will copy it later
+  del(['dist/index.html']);
+
+  // add livereload script to the index.html
+  gulp.src(['src/index.html'])
+   .pipe(replace(/(\<\/body\>)/g, "<script>document.write('<script src=\"http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1\"></' + 'script>')</script>$1"))
+   .pipe(gulp.dest('dist'));
+   
   // Create LiveReload server
   livereload.listen();
 
   // Watch any files in dist/* & index.html, reload on change
   gulp.watch(['dist/**', 'index.html']).on('change', livereload.changed);
-
-  console.log('To enable live reload, you can place following script in your page or use the browser plugin')
-  console.log("<script>document.write('<script src=\"http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1\"></' + 'script>')</script>");
 });
 
 
@@ -173,6 +183,7 @@ gulp.task('remove',['clean'], function(cb){
  */
 gulp.task('scripts-app', ['docs'], function() {
   return gulp.src('src/js/app/**/*.js')
+    .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(jshint())
     .on('error', notify.onError(function (error) {
@@ -184,7 +195,7 @@ gulp.task('scripts-app', ['docs'], function() {
     .pipe(rename({suffix: '.min'}))
     .pipe(gulpif(!argv.dev, stripDebug()))
     .pipe(ngannotate())
-    .pipe(uglify())
+    .pipe(gulpif(!argv.dev, uglify()))
     .on('error', handleError)
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('dist/assets/js'))
@@ -211,6 +222,7 @@ gulp.task('scripts-vendor', function() {
  */
 gulp.task('styles', function() {
   return gulp.src('src/styles/main.scss')
+    .pipe(plumber())
     .pipe(sass({ style: 'expanded' }))
     .on('error', handleError)
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
@@ -228,10 +240,11 @@ gulp.task('styles', function() {
  */
 gulp.task('todo', function() {
     gulp.src('src/js/app/**/*.js')
-        .pipe(todo())
-        .pipe(gulp.dest('./')) //output todo.md as markdown
-        .pipe(todo.reporter('json', {fileName: 'todo.json'}))
-        .pipe(gulp.dest('./')) //output todo.json as json
+      .pipe(plumber())
+      .pipe(todo())
+      .pipe(gulp.dest('./')) //output todo.md as markdown
+      .pipe(todo.reporter('json', {fileName: 'todo.json'}))
+      .pipe(gulp.dest('./')) //output todo.json as json
 });
 
 

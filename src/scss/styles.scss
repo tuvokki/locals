@@ -3,6 +3,8 @@
 @import 'includes/vars';
 
 $font-size-pss: 12px;
+$text-color: $color-primary-1;
+$background-color: $color-secondary-1-0;
 
 html,
 body {
@@ -10,7 +12,7 @@ body {
   padding:0;
   height:100%;
   overflow-x: hidden;
-  background-color : $primary-color-five;
+  background-color : $color-primary-0;
   color: $text-color;
   font-family: $secundary-font;
   font-size: $font-size-pss;
@@ -21,7 +23,7 @@ $footer_height: 2em;
 
 header {
   height: $header_height;
-  background-image: url(http://pc06698/wicket/resource/nl.planon.pss.wicket.PssBasePage/styling/img/PSSicon.png);
+  background-image: url(/styling/img/PSSicon.png);
   background-position-x: 15px;
   background-position-y: 50%;
   background-repeat: no-repeat;
@@ -73,16 +75,16 @@ header {
     padding: 10px;
     input {
       margin: 10px 6px 10px 6px;
-      background-color: $primary-color-five;
-      border: 1px solid $complement-color-two;
+      background-color: $color-primary-0;
+      border: 1px solid $color-primary-2;
       padding: 4px 4px 4px 4px; 
-      box-shadow: 0px 0px 8px $complement-color-two;
+      box-shadow: 0px 0px 8px $color-primary-2;
       font-size: $font-size;
     }
     input:focus {
       outline: none; 
-      border: 1px solid $complement-color-one; 
-      box-shadow: 0px 0px 8px $complement-color-one; 
+      border: 1px solid $color-primary-3; 
+      box-shadow: 0px 0px 8px $color-primary-3; 
     }
     input.smallfield {
       width: 100px;
@@ -106,26 +108,26 @@ header {
     input[type=checkbox]:checked + label {
       background-image: none;
       outline: 0;
-      color: $complement-color-one;
-      background-color:$complement-color-two;
-      box-shadow: 0px 0px 8px $complement-color-two;
+      color: $color-primary-3;
+      background-color:$color-primary-2;
+      box-shadow: 0px 0px 8px $color-primary-2;
     }
 
     button {
       color: #ffffff;
       font-size: $font-size;
       text-decoration: none;
-      box-shadow:inset 0px 1px 0px 0px $complement-color-two;
-      background: $complement-color-two;
+      box-shadow:inset 0px 1px 0px 0px $color-primary-2;
+      background: $color-primary-2;
 
-      border: 1px solid $complement-color-two;
+      border: 1px solid $color-primary-2;
       display: inline-block;
     }
     button:hover {
-      background: $complement-color-three;
-      box-shadow:inset 0px 1px 0px 0px $complement-color-three;
-      border: 1px solid $complement-color-three;
-      color: $complement-color-four;
+      background: $color-primary-4;
+      box-shadow:inset 0px 1px 0px 0px $color-primary-4;
+      border: 1px solid $color-primary-4;
+      color: $color-secondary-1-0;
       text-decoration: none;
       display: inline-block;
     }
@@ -138,8 +140,8 @@ header {
       height: 3.3em;
       margin: 2px;
       padding: 2px;
-      background: $primary-color-four;
-      border: 1px solid $primary-color-three;
+      background: $color-secondary-2-0;
+      border: 1px solid $color-secondary-1-1;
       display: inline-block;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -157,8 +159,8 @@ header {
       li.tag {
         padding: 4px;
         float: left;
-        background: $primary-color-one;
-        border: 2px solid $primary-color-four;
+        background: $color-secondary-1-3;
+        border: 2px solid $color-secondary-2-0;
       }
     }
     li.link:hover {
@@ -200,7 +202,7 @@ header {
 }//rightpanel
 footer {
   height: $footer_height;
-  background-color: $complement-color-two;
+  background-color: $color-primary-2;
   padding: 8px 2px;
   color: rgba(255, 255, 255, 1);
   position: relative;
