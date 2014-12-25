@@ -64,7 +64,7 @@ gulp.task 'css', ->
     .pipe sass()
     .pipe prefix "> 1%"
     .pipe cssmin keepSpecialComments: 0
-    .pipe gulp.dest 'www/css'
+    .pipe gulp.dest 'dist/static/css'
 
 # Create HTML
 # 
@@ -119,7 +119,7 @@ gulp.task 'lint', ->
 
 # Remove generated sources
 gulp.task 'clean', ->
-  del ['dist/**']
+  del.sync ['dist/**']
 
 # Default task call every tasks created so far.
 gulp.task 'default', ['scripts', 'css', 'html', 'resources']
