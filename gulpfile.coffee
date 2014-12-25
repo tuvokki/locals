@@ -12,10 +12,15 @@ stylish     = require 'jshint-stylish'
 fs          = require 'fs'
 underscore  = require 'underscore'
 
-# Create the prerequisites for the actual
-# app and the app itself
+# Create the prerequisites for the actual app
+# 
+# depends on:
+#   vendor
+#   app
 gulp.task 'scripts', ['vendor', 'app']
 
+# vendor task - retrieves the dependencies from the bower
+# definition and concatenates then onto vendor.js
 gulp.task 'vendor', ->
   bowerFile = require './bower.json'
   bowerDir = './client/lib'
@@ -43,6 +48,7 @@ gulp.task 'vendor', ->
     .pipe concat('vendor.js')
     .pipe gulp.dest 'dist/static/js'
 
+# app task - concatenates all application code into app.js
 gulp.task 'app', ->
   gulp.src ['src/javascript/app.js', 'src/javascript/directives/*.js', 'src/javascript/services/*.js', 'src/javascript/controllers/*.js']
     .pipe plumber()
@@ -51,8 +57,7 @@ gulp.task 'app', ->
     .pipe gulp.dest 'dist/static/js'
 
 
-# Create your CSS from Sass, Autoprexif it to target 99%
-#  of web browsers, minifies it.
+# Create CSS - compiles the sass sources into styles.css
 gulp.task 'css', ->
   gulp.src 'src/scss/styles.scss'
     .pipe plumber()
@@ -61,9 +66,14 @@ gulp.task 'css', ->
     .pipe cssmin keepSpecialComments: 0
     .pipe gulp.dest 'www/css'
 
-# Create your HTML
+# Create HTML
+# 
+# depends on:
+#   minify-html
+#   minify-partials
 gulp.task 'html', ['minify-html', 'minify-partials']
 
+# minify-html task - minifies the html sources
 gulp.task 'minify-html', ->
   opts = {empty:true,spare:true}
   gulp.src 'src/*.html'
@@ -71,6 +81,7 @@ gulp.task 'minify-html', ->
     .pipe minifyHTML(opts)
     .pipe gulp.dest 'dist'
 
+# minify-partials task - minifies partials html sources
 gulp.task 'minify-partials', ->
   opts = {empty:true,spare:true}
   gulp.src 'src/partials/*.html'
@@ -84,13 +95,27 @@ gulp.task 'resources', ->
     .pipe plumber()
     .pipe gulp.dest 'dist/static/css/fonts'
 
+# watch task - watches changes in files and runs tasks on changes
+# 
+# depends on:
+#   sass
+#   scripts
+#   lint
+#   minify-html
+#   minify-partials
 gulp.task 'watch', ->
   gulp.watch "src/scss/*.scss", ['sass']
   gulp.watch "src/javascript/**/*.js", ['scripts', 'lint']
   gulp.watch "src/index.html", ['minify-html']
   gulp.watch "src/partials/*.html", ['minify-partials']
-  gulp.watch 'src/img/**/*', ['images']
+  #gulp.watch 'src/img/**/*', ['images']
 
+# lint task - checks the produced javascript
+gulp.task 'lint', ->
+  gulp.src ['src/javascript/controllers/*.js', 'src/javascript/services/*.js', 'src/javascript/*.js']
+    .pipe plumber()
+    .pipe jshint()
+    .pipe jshint.reporter stylish
 
 # Remove generated sources
 gulp.task 'clean', ->
