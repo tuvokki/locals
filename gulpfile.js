@@ -1,6 +1,7 @@
 var gulp        = require('gulp'),
     browserSync = require('browser-sync'),
     livereload  = require('gulp-livereload'),
+    del         = require('del'),
     replace     = require('gulp-replace');
 
 // Note the new way of requesting CoffeeScript since 1.7.x

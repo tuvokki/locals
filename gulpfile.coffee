@@ -98,13 +98,13 @@ gulp.task 'resources', ->
 # watch task - watches changes in files and runs tasks on changes
 # 
 # depends on:
-#   sass
+#   css
 #   scripts
 #   lint
 #   minify-html
 #   minify-partials
 gulp.task 'watch', ->
-  gulp.watch "src/scss/*.scss", ['sass']
+  gulp.watch "src/scss/*.scss", ['css']
   gulp.watch "src/javascript/**/*.js", ['scripts', 'lint']
   gulp.watch "src/index.html", ['minify-html']
   gulp.watch "src/partials/*.html", ['minify-partials']
