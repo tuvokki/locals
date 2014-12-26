@@ -1,7 +1,4 @@
-app.controller "MessagesController", [
-  "$scope"
-  "$firebase"
-  "$location"
+app.controller "MessagesController",
   ($scope, $firebase, $location) ->
     $scope.whatsMyName = "Messages"
     fireBaseMessagesUrl = "https://amber-fire-3343.firebaseio.com/messages"
@@ -33,4 +30,3 @@ app.controller "MessagesController", [
 
       $scope.messageText = ""
       return
-]
