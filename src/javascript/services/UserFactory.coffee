@@ -1,6 +1,6 @@
 app.factory 'UserData', ->
   factoryData = {}
-  factoryData.users = 
+  factoryData.users =
     [{
       'username': 'gchap',
       'password': 'Albert',
@@ -32,5 +32,6 @@ app.factory 'UserData', ->
       'password': 'benempted',
       'name': 'Michael Palin',
       'birth': '1943'
-    }];
+    }]
+
   return factoryData

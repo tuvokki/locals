@@ -13,7 +13,8 @@
     "gulp-livereload": "~3.0.2",
     "coffee-script": "~1.8.0",
     "gulp-coffee": "~2.2.0",
-    "gulp-if": "~1.2.5"
+    "gulp-if": "~1.2.5",
+    "gulp-coffeelint": "~0.4.0"
   },
   "devDependencies": {
     "browser-sync": "~1.7.1",

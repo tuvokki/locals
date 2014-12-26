@@ -10,6 +10,7 @@ concat      = require 'gulp-concat'
 del         = require 'del'
 plumber     = require 'gulp-plumber'
 jshint      = require 'gulp-jshint'
+coffeelint  = require 'gulp-coffeelint'
 stylish     = require 'jshint-stylish'
 fs          = require 'fs'
 underscore  = require 'underscore'
@@ -117,13 +118,20 @@ gulp.task 'resources', ->
 gulp.task 'watch', ->
   gulp.watch "src/scss/*.scss", ['css']
   gulp.watch "src/javascript/**/*.js", ['scripts', 'lint']
+  gulp.watch "src/javascript/**/*.coffee", ['scripts', 'clint']
   gulp.watch "src/index.html", ['minify-html']
   gulp.watch "src/partials/*.html", ['minify-partials']
   #gulp.watch 'src/img/**/*', ['images']
 
+# coffee lint - checks the produced coffee files
+gulp.task 'clint', ->
+  gulp.src './src/javascript/**/*.coffee'
+      .pipe coffeelint()
+      .pipe coffeelint.reporter()
+
 # lint task - checks the produced javascript
 gulp.task 'lint', ->
-  gulp.src ['src/javascript/controllers/*.js', 'src/javascript/services/*.js', 'src/javascript/*.js']
+  gulp.src ['src/javascript/**/*.js']
     .pipe plumber()
     .pipe jshint()
     .pipe jshint.reporter stylish
