@@ -12,6 +12,9 @@ stylish     = require 'jshint-stylish'
 fs          = require 'fs'
 underscore  = require 'underscore'
 
+#also require the webserver and live-reload related tasks
+require './gulp-serve.coffee'
+
 # Create the prerequisites for the actual app
 # 
 # depends on:
@@ -31,16 +34,16 @@ gulp.task 'vendor', ->
     bowerDepFile = require dir + 'bower.json'
     file = dir + bowerDepFile.main
     minfile = file.substring(0, file.length - 3) + '.min.js'
-    console.log "file", file
-    console.log "minfile", minfile
+    # console.log "file", file
+    # console.log "minfile", minfile
 
     if fs.existsSync minfile 
       # use min version
-      console.log "use min"
+      # console.log "use min"
       bowerPackages.push minfile
     else
       # unminified
-      console.log "use file"
+      # console.log "use file"
       bowerPackages.push file
 
   gulp.src bowerPackages
@@ -120,6 +123,9 @@ gulp.task 'lint', ->
 # Remove generated sources
 gulp.task 'clean', ->
   del.sync ['dist/**']
+
+gulp.task 'build', ['clean'], ->
+  gulp.start 'css', 'scripts', 'html', 'resources'
 
 # Default task call every tasks created so far.
 gulp.task 'default', ['scripts', 'css', 'html', 'resources']
