@@ -57,9 +57,9 @@ gulp.task 'vendor', ->
 # app task - concatenates all application code into app.js
 gulp.task 'app', ->
   gulp.src ['src/javascript/app.js',
-            'src/javascript/directives/*.js',
+            'src/javascript/directives/*',
             'src/javascript/services/*',
-            'src/javascript/controllers/*.js'
+            'src/javascript/controllers/*'
            ]
     .pipe plumber()
     .pipe gulpif /[.]coffee$/, coffee({bare: true})
@@ -113,6 +113,7 @@ gulp.task 'resources', ->
 #   css
 #   scripts
 #   lint
+#   clint
 #   minify-html
 #   minify-partials
 gulp.task 'watch', ->
@@ -140,6 +141,10 @@ gulp.task 'lint', ->
 gulp.task 'clean', ->
   del.sync ['dist/**']
 
+# build task - builds all sources
+#
+# depends on:
+#   clean
 gulp.task 'build', ['clean'], ->
   gulp.start 'css', 'scripts', 'html', 'resources'
 
