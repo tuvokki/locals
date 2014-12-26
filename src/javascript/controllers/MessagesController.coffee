@@ -7,7 +7,8 @@ app.controller "MessagesController", [
     fireBaseMessagesUrl = "https://amber-fire-3343.firebaseio.com/messages"
     
     # create a query for the most recent 50 messages on the server
-    ref = new Firebase(fireBaseMessagesUrl) #.orderBy("timestamp").limitToLast(50);
+    ref = new Firebase(fireBaseMessagesUrl)
+    #.orderBy("timestamp").limitToLast(50);
     # create an AngularFire reference to the data
     sync = $firebase(ref)
     
@@ -15,11 +16,13 @@ app.controller "MessagesController", [
     # all server changes are applied in realtime
     messagesArray = sync.$asArray()
     
-    # place the list into $scope for use in the DOM
+    # place the list into $scope for use in the html
     $scope.messages = messagesArray
 
     getURLParameter = (name) ->
+      # coffeelint: disable=max_line_length
       decodeURIComponent name[1]  if name = (new RegExp("[?&]" + encodeURIComponent(name) + "=([^&]*)")).exec(location.search)
+      # coffeelint: enable=max_line_length
     $scope.uname = getURLParameter("uname")
 
     # add a message

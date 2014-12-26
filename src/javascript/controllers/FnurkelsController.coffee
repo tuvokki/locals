@@ -2,13 +2,13 @@
 FnurkController. Responsible for the controlling the fnurk.
 ###
 app.controller "FnurkelsController", ($scope, $route, $location, LinkBagData) ->
-  $scope.whatsMyName = "Fnurkels"
+  $scope.whatsMyName = "Fnurkelzz"
   $scope.theUrl = ""
   $scope.tags = []
   
-  # set the "scripturl" option to supress the JSLint 'Script URL' warning 
-  #jshint scripturl:true
-  $scope.blet = "javascript:(function(){window.location='" + $location.absUrl() + "?urlletje='+encodeURIComponent(window.location.href);})()"
+  $scope.blet = "javascript:(function(){window.location='"
+  + $location.absUrl()
+  + "?urlletje='+encodeURIComponent(window.location.href);})()"
   
   $scope.linkbaglist = LinkBagData.query({}, ->
     angular.forEach $scope.linkbaglist, (linkbag) ->
@@ -21,7 +21,8 @@ app.controller "FnurkelsController", ($scope, $route, $location, LinkBagData) ->
       return
 
     # Remove the duplicates
-    # Although concise, this algorithm is not particularly efficient for large arrays (quadratic time).
+    # Although concise, this algorithm is not particularly efficient
+    # for large arrays (quadratic time).
     # See: http://stackoverflow.com/a/9229821/2245236
     $scope.tags = $scope.tags.filter((item, pos, self) ->
       self.indexOf(item) is pos
@@ -56,8 +57,10 @@ app.controller "FnurkelsController", ($scope, $route, $location, LinkBagData) ->
     return
 
   $scope.addNewTag = (event) ->
+    # coffeelint: disable=max_line_length
     if not angular.isUndefined($scope.newTag) and $scope.tags.indexOf($scope.newTag) is -1 and $scope.newTag isnt ""
-      
+    # coffeelint: enable=max_line_length
+
       # var myNewTag = _fasttrim($scope.newTag).toLowerCase();
       myNewTag = $scope.newTag.replace(/\s+/g, "").toLowerCase()
       $scope.tags.push myNewTag

@@ -11,7 +11,7 @@ del         = require 'del'
 plumber     = require 'gulp-plumber'
 jshint      = require 'gulp-jshint'
 coffeelint  = require 'gulp-coffeelint'
-stylish     = require 'jshint-stylish'
+stylish     = require 'coffeelint-stylish'
 fs          = require 'fs'
 underscore  = require 'underscore'
 
