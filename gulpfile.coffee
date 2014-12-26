@@ -13,6 +13,7 @@ jshint      = require 'gulp-jshint'
 coffeelint  = require 'gulp-coffeelint'
 stylish     = require 'coffeelint-stylish'
 fs          = require 'fs'
+path        = require 'path'
 underscore  = require 'underscore'
 
 #also require the webserver and live-reload related tasks
@@ -25,8 +26,6 @@ require './gulp-serve.coffee'
 #   app
 gulp.task 'scripts', ['vendor', 'app']
 
-# vendor task - retrieves the dependencies from the bower
-# definition and concatenates then onto vendor.js
 gulp.task 'vendor', ->
   bowerFile = require './bower.json'
   bowerDir = './client/lib'
@@ -48,7 +47,19 @@ gulp.task 'vendor', ->
       # unminified
       # console.log "use file"
       bowerPackages.push file
+    return
 
+  # push anything in src/javascript/vendor to the array
+  p = './src/javascript/vendor'
+
+  if fs.existsSync p
+    files = fs.readdirSync p
+    underscore.each files, (file) ->
+      # console.log "%s (%s)", file, path.extname file
+      bowerPackages.push p + "/" + file
+      return
+    
+  # console.log bowerPackages 
   gulp.src bowerPackages
     .pipe plumber()
     .pipe concat('vendor.js')
