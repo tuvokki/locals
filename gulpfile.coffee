@@ -1,5 +1,7 @@
 # Load all required libraries.
 gulp        = require 'gulp'
+gulpif      = require 'gulp-if'
+coffee      = require 'gulp-coffee'
 sass        = require 'gulp-sass'
 prefix      = require 'gulp-autoprefixer'
 cssmin      = require 'gulp-minify-css'
@@ -53,8 +55,14 @@ gulp.task 'vendor', ->
 
 # app task - concatenates all application code into app.js
 gulp.task 'app', ->
-  gulp.src ['src/javascript/app.js', 'src/javascript/directives/*.js', 'src/javascript/services/*.js', 'src/javascript/controllers/*.js']
+  gulp.src ['src/javascript/app.js',
+            'src/javascript/directives/*.js',
+            'src/javascript/services/*',
+            'src/javascript/controllers/*.js'
+           ]
     .pipe plumber()
+    .pipe gulpif /[.]coffee$/, coffee({bare: true})
+      # .on('error', gutil.log))
     # .pipe(uglify())
     .pipe concat('app.js')
     .pipe gulp.dest 'dist/static/js'
