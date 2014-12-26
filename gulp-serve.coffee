@@ -47,7 +47,7 @@ gulp.task 'webserver', ->
   server.listen serverPort
   console.log 'starting server on port ' + serverPort
   open = require 'open'
-  open 'http://localhost:' + serverPort + '/'
+  open 'http://127.0.0.1:' + serverPort + '/'
 
 # Task to start a server and use live reload
 # Depends on: webserver, live-reload

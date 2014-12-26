@@ -4,7 +4,7 @@
 
 $font-size-pss: 20px;
 $text-color: $color-primary-1;
-$background-color: $color-secondary-1-0;
+$background-color: $color-primary-0;
 
 html,
 body {
@@ -12,7 +12,7 @@ body {
   padding:0;
   height:100%;
   overflow-x: hidden;
-  background-color : $color-primary-0;
+  background-color : $background-color;
   color: $text-color;
   font-family: $secundary-font;
   font-size: $font-size-pss;
