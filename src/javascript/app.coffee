@@ -26,6 +26,6 @@ app.config [
         templateUrl: 'partials/impress.html',
         controller: 'ImpressController'
       .otherwise
-        redirectTo: '/messages'
+        redirectTo: '/impress'
       return
   ]
