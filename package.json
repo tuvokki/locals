@@ -29,7 +29,8 @@
     "gulp-coffee": "~2.2.0",
     "gulp-if": "~1.2.5",
     "gulp-coffeelint": "~0.4.0",
-    "coffeelint-stylish": "~0.1.1"
+    "coffeelint-stylish": "~0.1.1",
+    "gulp-debug": "~1.0.1"
   },
   "scripts": {
     "test": "mocha",

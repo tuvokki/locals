@@ -1,22 +1,27 @@
 # Load all required libraries.
+fs          = require 'fs'
+del         = require 'del'
 gulp        = require 'gulp'
+path        = require 'path'
 gulpif      = require 'gulp-if'
-coffee      = require 'gulp-coffee'
 sass        = require 'gulp-sass'
-prefix      = require 'gulp-autoprefixer'
+debug       = require 'gulp-debug'
+underscore  = require 'underscore'
+concat      = require 'gulp-concat'
+coffee      = require 'gulp-coffee'
+jshint      = require 'gulp-jshint'
+rename      = require 'gulp-rename'
+plumber     = require 'gulp-plumber'
+coffeelint  = require 'gulp-coffeelint'
 cssmin      = require 'gulp-minify-css'
 minifyHTML  = require 'gulp-minify-html'
-concat      = require 'gulp-concat'
-del         = require 'del'
-plumber     = require 'gulp-plumber'
-jshint      = require 'gulp-jshint'
-coffeelint  = require 'gulp-coffeelint'
+prefix      = require 'gulp-autoprefixer'
 stylish     = require 'coffeelint-stylish'
-fs          = require 'fs'
-path        = require 'path'
-underscore  = require 'underscore'
 
-#also require the webserver and live-reload related tasks
+# Set some options for debugging
+debug-opts  = {verbose: true}
+
+# Also require the webserver and live-reload related tasks
 require './gulp-serve.coffee'
 
 # Create the prerequisites for the actual app
@@ -70,7 +75,8 @@ gulp.task 'app', ->
   gulp.src ['src/javascript/app.coffee',
             'src/javascript/directives/**/*',
             'src/javascript/services/**/*',
-            'src/javascript/controllers/**/*'
+            'src/javascript/controllers/**/*',
+            'src/modules/**/*.coffee'
            ]
     .pipe plumber()
     .pipe gulpif /[.]coffee$/, coffee({bare: true})
@@ -89,28 +95,39 @@ gulp.task 'css', ->
     .pipe cssmin keepSpecialComments: 0
     .pipe gulp.dest 'dist/static/css'
 
+# # Create HTML
+# # 
+# # depends on:
+# #   minify-html
+# #   minify-partials
+# gulp.task 'html', ['minify-html', 'minify-partials']
+
+# # minify-html task - minifies the html sources
+# gulp.task 'minify-html', ->
+#   opts = {empty:true,spare:true}
+#   gulp.src 'src/*.html'
+#     .pipe plumber()
+#     .pipe minifyHTML(opts)
+#     .pipe gulp.dest 'dist'
+
 # Create HTML
 # 
 # depends on:
 #   minify-html
-#   minify-partials
-gulp.task 'html', ['minify-html', 'minify-partials']
-
-# minify-html task - minifies the html sources
-gulp.task 'minify-html', ->
-  opts = {empty:true,spare:true}
-  gulp.src 'src/*.html'
-    .pipe plumber()
-    .pipe minifyHTML(opts)
-    .pipe gulp.dest 'dist'
+gulp.task 'html', ['minify-html']
 
 # minify-partials task - minifies partials html sources
-gulp.task 'minify-partials', ->
+gulp.task 'minify-html', ->
   opts = {empty:true,spare:true}
-  gulp.src 'src/partials/*.html'
+  # debugger
+  gulp.src ['src/**/*.html']
     .pipe plumber()
     .pipe minifyHTML(opts)
-    .pipe gulp.dest 'dist/partials'
+    # .pipe debug debug-opts
+    # .pipe rename (path) ->
+    #   # Do something / modify the path here
+    #   console.log path
+    .pipe gulp.dest 'dist'
 
 # Copy static resources using streams.
 gulp.task 'resources', ->
@@ -129,10 +146,11 @@ gulp.task 'resources', ->
 #   minify-partials
 gulp.task 'watch', ->
   gulp.watch "src/scss/*.scss", ['css']
-  gulp.watch "src/javascript/**/*.js", ['scripts', 'lint']
-  gulp.watch "src/javascript/**/*.coffee", ['scripts', 'clint']
-  gulp.watch "src/index.html", ['minify-html']
-  gulp.watch "src/partials/*.html", ['minify-partials']
+  gulp.watch "src/**/*.js", ['scripts', 'lint']
+  gulp.watch "src/**/*.coffee", ['scripts', 'clint']
+  # gulp.watch "src/index.html", ['minify-html']
+  gulp.watch "src/**/*.html", ['html']
+  # gulp.watch "src/partials/*.html", ['minify-partials']
   #gulp.watch 'src/img/**/*', ['images']
 
 # coffee lint - checks the produced coffee files
