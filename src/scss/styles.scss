@@ -1,6 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600);
 @import 'includes/reset';
 @import 'includes/vars';
+@import 'includes/impress';
 
 $font-size-pss: 20px;
 $text-color: $color-primary-1;
@@ -23,7 +24,7 @@ $footer_height: 2em;
 
 header {
   height: $header_height;
-  background-image: url(/styling/img/PSSicon.png);
+  // background-image: url(/styling/img/PSSicon.png);
   background-position-x: 15px;
   background-position-y: 50%;
   background-repeat: no-repeat;

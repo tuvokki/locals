@@ -95,38 +95,18 @@ gulp.task 'css', ->
     .pipe cssmin keepSpecialComments: 0
     .pipe gulp.dest 'dist/static/css'
 
-# # Create HTML
-# # 
-# # depends on:
-# #   minify-html
-# #   minify-partials
-# gulp.task 'html', ['minify-html', 'minify-partials']
-
-# # minify-html task - minifies the html sources
-# gulp.task 'minify-html', ->
-#   opts = {empty:true,spare:true}
-#   gulp.src 'src/*.html'
-#     .pipe plumber()
-#     .pipe minifyHTML(opts)
-#     .pipe gulp.dest 'dist'
-
 # Create HTML
 # 
 # depends on:
 #   minify-html
 gulp.task 'html', ['minify-html']
 
-# minify-partials task - minifies partials html sources
+# minify-html task - minifies html sources
 gulp.task 'minify-html', ->
   opts = {empty:true,spare:true}
-  # debugger
   gulp.src ['src/**/*.html']
     .pipe plumber()
     .pipe minifyHTML(opts)
-    # .pipe debug debug-opts
-    # .pipe rename (path) ->
-    #   # Do something / modify the path here
-    #   console.log path
     .pipe gulp.dest 'dist'
 
 # Copy static resources using streams.
@@ -142,20 +122,17 @@ gulp.task 'resources', ->
 #   scripts
 #   lint
 #   clint
-#   minify-html
-#   minify-partials
+#   html
 gulp.task 'watch', ->
   gulp.watch "src/scss/*.scss", ['css']
   gulp.watch "src/**/*.js", ['scripts', 'lint']
   gulp.watch "src/**/*.coffee", ['scripts', 'clint']
-  # gulp.watch "src/index.html", ['minify-html']
   gulp.watch "src/**/*.html", ['html']
-  # gulp.watch "src/partials/*.html", ['minify-partials']
   #gulp.watch 'src/img/**/*', ['images']
 
 # coffee lint - checks the produced coffee files
 gulp.task 'clint', ->
-  gulp.src './src/javascript/**/*.coffee'
+  gulp.src './src/**/*.coffee'
       .pipe coffeelint()
       .pipe coffeelint.reporter()
 
