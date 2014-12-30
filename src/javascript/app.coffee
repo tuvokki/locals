@@ -20,7 +20,7 @@ app.config [
         templateUrl: 'partials/fnurkels.html',
         controller: 'FnurkelsController'
       .when '/messages',
-        templateUrl: 'partials/messages.html',
+        templateUrl: 'modules/messages/messages.html',
         controller: 'MessagesController'
       .when '/impress',
         templateUrl: 'modules/impress/impress.html',
