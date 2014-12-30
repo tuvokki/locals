@@ -1,7 +1,7 @@
 ###*
-MainController. Responsible for the initial view.
+ZwadonkController. Responsible for the zwadonk view.
 ###
-app.controller "MainController", ($scope, LinkBagData, LinkBagUtils) ->
+app.controller "ZwadonkController", ($scope, LinkBagData, LinkBagUtils) ->
   $scope.whatsMyName = "Zwadonk"
   $scope.whosTheMan = chance.string()
   $scope.linkbaglist = LinkBagData.query({}, ->

@@ -14,10 +14,10 @@ app.config [
   ($routeProvider) ->
     $routeProvider
       .when '/zwadonk',
-        templateUrl: 'partials/zwadonk.html',
-        controller: 'MainController'
+        templateUrl: 'modules/zwadonk/zwadonk.html',
+        controller: 'ZwadonkController'
       .when '/fnurkels',
-        templateUrl: 'partials/fnurkels.html',
+        templateUrl: 'modules/fnurkels/fnurkels.html',
         controller: 'FnurkelsController'
       .when '/messages',
         templateUrl: 'modules/messages/messages.html',
@@ -26,6 +26,6 @@ app.config [
         templateUrl: 'modules/impress/impress.html',
         controller: 'ImpressController'
       .otherwise
-        redirectTo: '/impress'
+        redirectTo: '/zwadonk'
       return
   ]
