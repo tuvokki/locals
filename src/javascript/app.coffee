@@ -25,7 +25,11 @@ app.config [
       .when '/impress',
         templateUrl: 'modules/impress/impress.html',
         controller: 'ImpressController'
+      .when '/impress',
+        templateUrl: 'modules/impress/impress.html',
+        controller: 'ImpressController'
       .otherwise
-        redirectTo: '/zwadonk'
+        templateUrl: 'partials/notthere.html',
+        controller: 'NotThereController'
       return
   ]
