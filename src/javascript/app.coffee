@@ -17,6 +17,9 @@ app.config [
         templateUrl: (urlattr) ->
           'modules/' + urlattr.moduleName + '/' + urlattr.moduleName + '.html'
         controller: 'ModulesController'
+        resolve:
+          moduleName: (moduleNameService) ->
+              moduleNameService.getModuleName()
       .when '/zwadonk',
         templateUrl: 'modules/zwadonk/zwadonk.html'
         controller: 'ZwadonkController'
@@ -41,5 +44,10 @@ app.config [
         controller: 'NotThereController'
       return
   ]
+
 capitaliseFirstLetter = (string) ->
   string.charAt(0).toUpperCase() + string.slice(1)
+
+app.factory "moduleNameService", ($q) ->
+  getModuleName: ->
+    $q.when 'Hello World'
