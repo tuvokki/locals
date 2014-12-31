@@ -13,23 +13,33 @@ app.config [
   '$routeProvider',
   ($routeProvider) ->
     $routeProvider
+      .when '/module/:moduleName',
+        templateUrl: (urlattr) ->
+          'modules/' + urlattr.moduleName + '/' + urlattr.moduleName + '.html'
+        controller: 'ModulesController'
       .when '/zwadonk',
-        templateUrl: 'modules/zwadonk/zwadonk.html',
+        templateUrl: 'modules/zwadonk/zwadonk.html'
         controller: 'ZwadonkController'
       .when '/fnurkels',
-        templateUrl: 'modules/fnurkels/fnurkels.html',
+        templateUrl: 'modules/fnurkels/fnurkels.html'
         controller: 'FnurkelsController'
       .when '/messages',
-        templateUrl: 'modules/messages/messages.html',
+        templateUrl: 'modules/messages/messages.html'
         controller: 'MessagesController'
       .when '/impress',
-        templateUrl: 'modules/impress/impress.html',
+        templateUrl: 'modules/impress/impress.html'
         controller: 'ImpressController'
+      # .when '/page/:name',
+      #   templateUrl: (urlattr) ->
+      #     '/pages/' + urlattr.name + '.html'
+      #   controller: 'PagesController'
       .when '/',
-        templateUrl: 'partials/index.html',
+        templateUrl: 'partials/index.html'
         controller: 'IndexController'
       .otherwise
-        templateUrl: 'partials/notthere.html',
+        templateUrl: 'partials/notthere.html'
         controller: 'NotThereController'
       return
   ]
+capitaliseFirstLetter = (string) ->
+  string.charAt(0).toUpperCase() + string.slice(1)
