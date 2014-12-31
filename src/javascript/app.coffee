@@ -18,8 +18,8 @@ app.config [
           'modules/' + urlattr.moduleName + '/' + urlattr.moduleName + '.html'
         controller: 'ModulesController'
         resolve:
-          moduleName: ->
-              greeting: "Hello World"
+          moduleName: ($route) ->
+            $route.current.params.moduleName
       .when '/zwadonk',
         templateUrl: 'modules/zwadonk/zwadonk.html'
         controller: 'ZwadonkController'
