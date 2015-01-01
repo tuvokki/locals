@@ -14,8 +14,8 @@ app.config [
   ($routeProvider) ->
     $routeProvider
       .when '/module/:moduleName',
-        templateUrl: (urlattr) ->
-          'modules/' + urlattr.moduleName + '/' + urlattr.moduleName + '.html'
+        templateUrl: ($route) ->
+          'modules/' + $route.current.params.moduleName + '/' + $route.current.params.moduleName + '.html'
         controller: 'ModulesController'
         resolve:
           moduleName: ($route) ->
@@ -32,10 +32,6 @@ app.config [
       .when '/impress',
         templateUrl: 'modules/impress/impress.html'
         controller: 'ImpressController'
-      # .when '/page/:name',
-      #   templateUrl: (urlattr) ->
-      #     '/pages/' + urlattr.name + '.html'
-      #   controller: 'PagesController'
       .when '/',
         templateUrl: 'partials/index.html'
         controller: 'IndexController'
