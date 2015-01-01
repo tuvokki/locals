@@ -41,5 +41,12 @@
     "thing"
   ],
   "author": "Wouter Roosendaal",
-  "license": "MIT"
+  "license": "MIT",
+  "coffeelintConfig": {
+    "max_line_length": {
+        "value": 120,
+        "level": "error",
+        "limitComments": true
+    }
+  }
 }
