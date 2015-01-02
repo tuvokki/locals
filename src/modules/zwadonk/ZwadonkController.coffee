@@ -1,5 +1,6 @@
 ###*
 ZwadonkController. Responsible for the zwadonk view.
+This is supposed to be dispatched work from the ModulesController
 ###
 app.controller "ZwadonkController", ($scope, LinkBagData, LinkBagUtils) ->
   $scope.whatsMyName = "Zwadonk"
