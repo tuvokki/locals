@@ -11,6 +11,7 @@ app.controller "ZwadonkController", ($scope, LinkBagData, LinkBagUtils) ->
   )
   $scope.toggleRightpanel = (event) ->
     $scope.showInfo = not $scope.showInfo
+    console.log 'Open info panel'
     if event
       event.stopPropagation()
       event.preventDefault()
