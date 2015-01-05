@@ -14,6 +14,7 @@ app.controller "ZwadonkController", ($scope, LinkBagData, LinkBagUtils) ->
     console.log 'Open info panel'
     if event
       # load contents of the panel
+      # donno why but I donnu what do actually _do_ here
       event.stopPropagation()
       event.preventDefault()
     return
