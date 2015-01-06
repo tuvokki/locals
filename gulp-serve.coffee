@@ -38,7 +38,7 @@ gulp.task 'live-reload', ['watch'], ->
 
 # Task to start a serve-static server on port 8989
 gulp.task 'webserver', ->
-  serverPort = args.p || 8989
+  serverPort = +args.p || 8989
   http = require 'http'
   finalhandler = require 'finalhandler'
   serveStatic = require 'serve-static'
