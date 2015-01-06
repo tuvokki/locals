@@ -38,6 +38,7 @@ gulp.task 'live-reload', ['watch'], ->
 
 # Task to start a serve-static server on port 8989
 gulp.task 'webserver', ->
+  serverName = args.n || '127.0.0.1'
   serverPort = +args.p || 8989
   http = require 'http'
   finalhandler = require 'finalhandler'
@@ -51,7 +52,7 @@ gulp.task 'webserver', ->
   server.listen serverPort
   console.log 'starting server on port ' + serverPort
   open = require 'open'
-  open 'http://127.0.0.1:' + serverPort + '/'
+  open 'http://' + serverName + ':' + serverPort + '/'
 
 # Task to start a server and use live reload
 # Depends on: webserver, live-reload

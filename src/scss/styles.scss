@@ -24,7 +24,8 @@ $footer_height: 2em;
 
 header {
   height: $header_height;
-  // background-image: url(/styling/img/PSSicon.png);
+  background-image: url(/static/images/favicon.png);
+  background-size: 24px;
   background-position-x: 15px;
   background-position-y: 50%;
   background-repeat: no-repeat;
