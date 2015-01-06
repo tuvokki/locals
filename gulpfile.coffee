@@ -3,6 +3,7 @@ fs          = require 'fs'
 del         = require 'del'
 gulp        = require 'gulp'
 path        = require 'path'
+yargs       = require 'yargs'
 gulpif      = require 'gulp-if'
 sass        = require 'gulp-sass'
 debug       = require 'gulp-debug'
@@ -18,8 +19,12 @@ minifyHTML  = require 'gulp-minify-html'
 prefix      = require 'gulp-autoprefixer'
 stylish     = require 'coffeelint-stylish'
 
+# read commandline params into object
+args = yargs.argv
+
 # Set some options for debugging
-debug-opts  = {verbose: true}
+debug_opts = {}
+debug_opts.verbose = args.v? || args.verbose?
 
 # Also require the webserver and live-reload related tasks
 require './gulp-serve.coffee'
@@ -33,7 +38,7 @@ gulp.task 'scripts', ['vendor', 'app']
 
 gulp.task 'vendor', ->
   bowerFile = require './bower.json'
-  bowerDir = './client/lib'
+  bowerDir = './bower_components'
   bowerPackages = []
 
   underscore.each bowerFile.dependencies, (version, name) ->
@@ -41,16 +46,19 @@ gulp.task 'vendor', ->
     bowerDepFile = require dir + 'bower.json'
     file = dir + bowerDepFile.main
     minfile = file.substring(0, file.length - 3) + '.min.js'
-    # console.log "file", file
-    # console.log "minfile", minfile
+    if debug_opts.verbose
+      console.log "file", file
+      console.log "minfile", minfile
 
     if fs.existsSync minfile 
       # use min version
-      # console.log "use min"
+      if debug_opts.verbose
+        console.log "use min"
       bowerPackages.push minfile
     else
       # unminified
-      # console.log "use file"
+      if debug_opts.verbose
+        console.log "use file"
       bowerPackages.push file
     return
 
@@ -60,7 +68,8 @@ gulp.task 'vendor', ->
   if fs.existsSync p
     files = fs.readdirSync p
     underscore.each files, (file) ->
-      # console.log "%s (%s)", file, path.extname file
+      if debug_opts.verbose
+        console.log "%s (%s)", file, path.extname file
       bowerPackages.push p + "/" + file
       return
     
