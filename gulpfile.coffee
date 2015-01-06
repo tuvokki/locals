@@ -119,10 +119,21 @@ gulp.task 'minify-html', ->
     .pipe gulp.dest 'dist'
 
 # Copy static resources using streams.
-gulp.task 'resources', ->
+#
+# depends on:
+#   fonts
+#   visuals
+gulp.task 'resources', ['fonts', 'visuals']
+
+gulp.task 'fonts', ->
   gulp.src 'src/fonts/*'
     .pipe plumber()
     .pipe gulp.dest 'dist/static/css/fonts'
+
+gulp.task 'visuals', ->
+  gulp.src 'src/visuals/**/*'
+    .pipe plumber()
+    .pipe gulp.dest 'dist/static'
 
 # watch task - watches changes in files and runs tasks on changes
 # 
