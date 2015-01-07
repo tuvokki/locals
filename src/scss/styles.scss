@@ -65,14 +65,80 @@ header {
   @media screen and (max-width: $break-small) {
     text-align: center;
   }
-  .welcome_pic {
+  $kader_size: 200px;
+  $kader_border: 10px;
+  .kader {
+    margin: $kader_border;
     float: left;
-    @media screen and (max-width: $break-small) {
+    border: $kader_border solid #fff;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    box-shadow: 1px 1px 2px #e6e6e6;
+    cursor: default;
+    background: #fff;
+    width: $kader_size;
+    height: $kader_size;
+    img {
       width: 100%;
-      float: none;
+      height: 100%;
+      display: block;
+      position: relative;
+      transform: scaleY(1);
+      transition: all 0.7s ease-in-out;
     }
-    @media screen and (min-width: $break-large) {
-      float: right;
+    .mask {
+      padding-top: 25%;
+      padding-bottom: auto;
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $color-complement-0;
+      transition: all 0.5s linear;
+      filter: alpha(opacity = 0);
+      opacity: 0;
+    }
+    h2 {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      background: transparent;
+      margin: 20px 40px 0px 40px;
+      transform: scale(0);
+      color: #333;
+      transition: all 0.5s linear;
+      filter: alpha(opacity = 0);
+      opacity: 0;
+    }
+    p {
+      color: #333;
+      filter: alpha(opacity = 0);
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.5s linear;
+    }
+    a.info {
+      filter: alpha(opacity = 0);
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.5s linear;
+    }
+    &:hover {
+      img {
+        transform: scale(10);
+        filter: alpha(opacity = 0);
+        opacity: 0;
+      }
+      .mask {
+        filter: alpha(opacity = 100);
+        opacity: 1;
+      }
+      h2, p, a.info {
+        transform: scale(1);
+        filter: alpha(opacity = 100);
+        opacity: 1;
+      }
     }
   }
   ul {
