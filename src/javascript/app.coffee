@@ -14,8 +14,8 @@ app.config [
   ($routeProvider) ->
     $routeProvider
       .when '/module/:moduleName',
-        templateUrl: ($route) ->
-          'modules/' + $route.current.params.moduleName + '/' + $route.current.params.moduleName + '.html'
+        templateUrl: (routeObj) ->
+          'modules/' + routeObj.moduleName + '/' + routeObj.moduleName + '.html'
         controller: 'ModulesController'
         resolve:
           moduleName: ($route) ->
