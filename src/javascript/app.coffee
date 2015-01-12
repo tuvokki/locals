@@ -21,21 +21,27 @@ app.config [
           moduleName: ($route) ->
             $route.current.params.moduleName
       .when '/zwadonk',
+        name: 'zwadonk',
         templateUrl: 'modules/zwadonk/zwadonk.html'
         controller: 'ZwadonkController'
       .when '/fnurkels',
+        name: 'fnurkels',
         templateUrl: 'modules/fnurkels/fnurkels.html'
         controller: 'FnurkelsController'
       .when '/messages',
+        name: 'messages',
         templateUrl: 'modules/messages/messages.html'
         controller: 'MessagesController'
       .when '/impress',
+        name: 'impress',
         templateUrl: 'modules/impress/impress.html'
         controller: 'ImpressController'
       .when '/',
+        name: 'index',
         templateUrl: 'partials/index.html'
         controller: 'IndexController'
       .otherwise
+        name: '404',
         templateUrl: 'partials/notthere.html'
         controller: 'NotThereController'
       return
