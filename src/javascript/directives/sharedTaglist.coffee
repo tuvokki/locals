@@ -1,2 +1,2 @@
 app.directive "sharedTaglist", ->
-  templateUrl: '/partials/taglist.html'
+  templateUrl: 'partials/taglist.html'

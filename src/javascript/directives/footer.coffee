@@ -1,2 +1,2 @@
 app.directive 'sharedFooter', ->
-  templateUrl: '/partials/footerstring.html'
+  templateUrl: 'partials/footerstring.html'
