@@ -37,3 +37,4 @@ tmp
 # the bower client files
 client
 bower_components
+local_settings.json
