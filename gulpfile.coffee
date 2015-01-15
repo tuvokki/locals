@@ -4,7 +4,6 @@ del         = require 'del'
 gulp        = require 'gulp'
 path        = require 'path'
 nconf       = require 'nconf'
-yargs       = require 'yargs'
 gulpif      = require 'gulp-if'
 sass        = require 'gulp-sass'
 debug       = require 'gulp-debug'
@@ -30,12 +29,9 @@ nconf.argv()
      .env()
      .file({ file: 'local_settings.json' });
 
-# read commandline params into object
-args = yargs.argv
-
 # Set some options for debugging
 debug_opts = {}
-debug_opts.verbose = args.v? || args.verbose?
+debug_opts.verbose = nconf.get('v')? || nconf.get('verbose')?
 
 # Also require the webserver and live-reload related tasks
 require './gulp-serve.coffee'
