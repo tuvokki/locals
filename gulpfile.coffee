@@ -3,6 +3,7 @@ fs          = require 'fs'
 del         = require 'del'
 gulp        = require 'gulp'
 path        = require 'path'
+nconf       = require 'nconf'
 yargs       = require 'yargs'
 gulpif      = require 'gulp-if'
 sass        = require 'gulp-sass'
@@ -19,6 +20,15 @@ cssmin      = require 'gulp-minify-css'
 minifyHTML  = require 'gulp-minify-html'
 prefix      = require 'gulp-autoprefixer'
 stylish     = require 'coffeelint-stylish'
+
+# Setup nconf to use (in-order):
+#   1. Command-line arguments
+#   2. Environment variables
+#   3. A file located at 'path/to/config.json'
+#
+nconf.argv()
+     .env()
+     .file({ file: 'local_settings.json' });
 
 # read commandline params into object
 args = yargs.argv
