@@ -3,7 +3,7 @@ fs          = require 'fs'
 del         = require 'del'
 gulp        = require 'gulp'
 path        = require 'path'
-yargs       = require 'yargs'
+nconf       = require 'nconf'
 gulpif      = require 'gulp-if'
 sass        = require 'gulp-sass'
 debug       = require 'gulp-debug'
@@ -20,12 +20,18 @@ minifyHTML  = require 'gulp-minify-html'
 prefix      = require 'gulp-autoprefixer'
 stylish     = require 'coffeelint-stylish'
 
-# read commandline params into object
-args = yargs.argv
+# Setup nconf to use (in-order):
+#   1. Command-line arguments
+#   2. Environment variables
+#   3. A file located at 'path/to/config.json'
+#
+nconf.argv()
+     .env()
+     .file({ file: 'local_settings.json' });
 
 # Set some options for debugging
 debug_opts = {}
-debug_opts.verbose = args.v? || args.verbose?
+debug_opts.verbose = nconf.get('v')? || nconf.get('verbose')?
 
 # Also require the webserver and live-reload related tasks
 require './gulp-serve.coffee'
@@ -82,7 +88,6 @@ gulp.task 'vendor', ->
 
 # app task - concatenates all application code into app.js
 gulp.task 'app', ->
-  settings = require './local_settings.json'
   gulp.src ['src/javascript/app.coffee',
             'src/javascript/directives/**/*',
             'src/javascript/services/**/*',
@@ -91,7 +96,7 @@ gulp.task 'app', ->
            ]
     .pipe plumber()
     .pipe gulpif /[.]coffee$/, coffee({bare: true})
-    .pipe replace '__OAUTH_TOKEN__', settings.oauth_token
+    .pipe replace '__OAUTH_TOKEN__', nconf.get 'oauth_token'
     .pipe concat('app.js')
     .pipe gulp.dest 'dist/static/js'
 
