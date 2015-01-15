@@ -17,6 +17,7 @@ app.controller "ScrithubController", ($scope, GitHubUtils) ->
     issueList.then (list) ->
       console.log list
       $scope.issues = list
+      $scope.$apply()
       return
 
   # $scope.$watch 'repo', (newRepop, oldRepo) ->
