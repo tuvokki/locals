@@ -92,7 +92,6 @@ gulp.task 'vendor', ->
 
 # app task - concatenates all application code into app.js
 gulp.task 'app', ->
-  settings = require './local_settings.json'
   gulp.src ['src/javascript/app.coffee',
             'src/javascript/directives/**/*',
             'src/javascript/services/**/*',
@@ -101,7 +100,7 @@ gulp.task 'app', ->
            ]
     .pipe plumber()
     .pipe gulpif /[.]coffee$/, coffee({bare: true})
-    .pipe replace '__OAUTH_TOKEN__', settings.oauth_token
+    .pipe replace '__OAUTH_TOKEN__', nconf.get 'oauth_token'
     .pipe concat('app.js')
     .pipe gulp.dest 'dist/static/js'
 
