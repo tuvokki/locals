@@ -1,0 +1,12 @@
+<header shared-header></header>
+<section class="content">
+  <h2>This is scrum with GitHub issues...</h2>
+
+  <form ng-submit="updateList()">
+    <input type="text" ng-model="repo" autofocus />
+  </form>
+  <ul>
+    <li ng-repeat="issue in issues">{{ issue.body }}</li>
+  </ul>
+</section>
+<footer shared-footer></footer>

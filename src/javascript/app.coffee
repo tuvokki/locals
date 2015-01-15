@@ -32,6 +32,10 @@ app.config [
         name: 'messages',
         templateUrl: 'modules/messages/messages.html'
         controller: 'MessagesController'
+      .when '/scrithub',
+        name: 'scrithub',
+        templateUrl: 'modules/scrithub/scrithub.html'
+        controller: 'ScrithubController'
       .when '/impress',
         name: 'impress',
         templateUrl: 'modules/impress/impress.html'

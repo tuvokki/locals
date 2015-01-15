@@ -12,6 +12,7 @@ concat      = require 'gulp-concat'
 coffee      = require 'gulp-coffee'
 jshint      = require 'gulp-jshint'
 rename      = require 'gulp-rename'
+replace     = require 'gulp-replace'
 plumber     = require 'gulp-plumber'
 coffeelint  = require 'gulp-coffeelint'
 cssmin      = require 'gulp-minify-css'
@@ -81,6 +82,7 @@ gulp.task 'vendor', ->
 
 # app task - concatenates all application code into app.js
 gulp.task 'app', ->
+  settings = require './local_settings.json'
   gulp.src ['src/javascript/app.coffee',
             'src/javascript/directives/**/*',
             'src/javascript/services/**/*',
@@ -89,8 +91,7 @@ gulp.task 'app', ->
            ]
     .pipe plumber()
     .pipe gulpif /[.]coffee$/, coffee({bare: true})
-      # .on('error', gutil.log))
-    # .pipe(uglify())
+    .pipe replace '__OAUTH_TOKEN__', settings.oauth_token
     .pipe concat('app.js')
     .pipe gulp.dest 'dist/static/js'
 
@@ -172,6 +173,20 @@ gulp.task 'clean', ->
 # depends on:
 #   clean
 gulp.task 'build', ['clean'], ->
+  gulp.start 'css', 'scripts', 'html', 'resources'
+
+# deploy task - copies the dist contents to a location
+#
+# depends on:
+#   build
+# gulp.task 'deploy', ['build'], ->
+#   console.log 'Copy files to webserver'
+#   gulp.src 'dist/**/*'
+#     .pipe plumber()
+#     .pipe gulp.dest 'D:/Development/pss2-head/Servers/tomcat/webapps/locals'
+#     # .pipe gulp.dest 'tmp/testgulptarget'
+
+gulp.task 'deploy', ->
   gulp.start 'css', 'scripts', 'html', 'resources'
 
 # Default task call every tasks created so far.
