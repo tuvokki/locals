@@ -10,7 +10,9 @@ Download sources
 run:
 
 	npm install
-	gulp
+  bower install
+  gulp build --oauth_token a2pzaGZhaXJzZmprYnZhZmdobHNha2pmaGxrYWpo
+  gulp serve
 go!
 
 **production use**
@@ -20,6 +22,7 @@ Download sources
 run:
 
 	npm install
+  bower install
 	npm start
 go!
 
