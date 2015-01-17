@@ -1,6 +1,6 @@
 # This is the okkistan app
 app = angular.module 'okkiStan',
-  ['ngRoute', 'ngResource', 'checklist-model', 'firebase']
+  ['ngRoute', 'ngResource', 'checklist-model', 'firebase', 'ngSanitize', 'btford.markdown']
 
 app.config [
   '$compileProvider',
