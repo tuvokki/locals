@@ -16,7 +16,7 @@ body {
   margin:0;
   padding:0;
   height:100%;
-  overflow-x: hidden;
+  overflow: hidden;
   background-color : $background-color;
   color: $text-color;
   font-family: $secundary-font;
@@ -62,7 +62,7 @@ header {
   margin-bottom: -$footer_height;
   margin-left: 0;
   color: rgba(0, 0, 0, 1);
-  overflow:auto;
+  overflow-y:auto;
   padding-top: $header_height+10;
   padding-left: 8px;
   padding-bottom: $footer_height;
@@ -298,23 +298,28 @@ header {
   }
 }//rightpanel
 footer {
-  height: $footer_height;
+  height: 100%;
   background-color: $color-primary-2;
-  padding: 8px 2px;
-  color: rgba(255, 255, 255, 1);
+  padding: 10px 2px;
+  color: rgba(0, 0, 0, 1);
   position: relative;
   z-index: 2;
   background-color: rgb(255, 255, 255);
+  font-size: 8px;
   a {
+    font-size: 16px;
+    font-weight: 600; 
     color: #3F4751;
     font-family: 'Open Sans';
-    font-weight: 600; 
-    font-size: 16px;
-    height: $footer_height;
     margin: 8px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     text-decoration: none;
+  }
+  .right {
+    float: right;
+    padding-top: 10px;
+    padding-right: 4px;
   }
 }//footer
