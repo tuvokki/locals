@@ -1,13 +1,23 @@
 # Load all required libraries.
-gulp        = require 'gulp'
-browserSync = require 'browser-sync'
-livereload  = require 'gulp-livereload'
 del         = require 'del'
+gulp        = require 'gulp'
+nconf       = require 'nconf'
+browserSync = require 'browser-sync'
 replace     = require 'gulp-replace'
-yargs       = require 'yargs'
+livereload  = require 'gulp-livereload'
 
-# read commandline params into object
-args = yargs.argv
+# Setup nconf to use (in-order):
+#   1. Command-line arguments
+#   2. Environment variables
+#   3. A file located at 'path/to/config.json'
+#
+nconf.argv()
+     .env()
+     .file({ file: 'local_settings.json' });
+
+# Set some options for debugging
+debug_opts = {}
+debug_opts.verbose = nconf.get('v')? || nconf.get('verbose')?
 
 # Set up browser sync with an array of changable resources
 gulp.task 'browser-sync', ->
@@ -38,21 +48,28 @@ gulp.task 'live-reload', ['watch'], ->
 
 # Task to start a serve-static server on port 8989
 gulp.task 'webserver', ->
-  serverName = args.n || '127.0.0.1'
-  serverPort = +args.p || 8989
+  serverName  = nconf.get('i') || nconf.get('ip')
+  serverPort  = nconf.get('p') || nconf.get('port')
+  serverDir   = nconf.get('d') || nconf.get('dir')
+  openBrowser = nconf.get('o') || nconf.get('open')
   http = require 'http'
   finalhandler = require 'finalhandler'
   serveStatic = require 'serve-static'
-  serve = serveStatic "./dist/"
+  if debug_opts.verbose
+    console.log 'starting server on http://' + serverName + ':' + serverPort + '/'
+
+  serve = serveStatic serverDir
 
   server = http.createServer (req, res) ->
     done = finalhandler req, res
     serve req, res, done
 
   server.listen serverPort
-  console.log 'starting server on port ' + serverPort
-  open = require 'open'
-  open 'http://' + serverName + ':' + serverPort + '/'
+  if openBrowser
+    if debug_opts.verbose
+      console.log 'Opening http://' + serverName + ':' + serverPort + '/ in browser ...'
+    open = require 'open'
+    open 'http://' + serverName + ':' + serverPort + '/'
 
 # Task to start a server and use live reload
 # Depends on: webserver, live-reload
