@@ -1,3 +1,7 @@
 {
-  "oauth_token": "get_a_oauth_token_on_github"
+  "oauth_token": "get_a_oauth_token_on_github",
+  "ip": "127.0.0.1",
+  "port": 8989,
+  "dir": "./dist/",
+  "open": false
 }
